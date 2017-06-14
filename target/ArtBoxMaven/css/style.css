@@ -1,0 +1,266 @@
+@CHARSET "UTF-8";
+@import "fonts.css";
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+	background: url(../img/play.png) repeat;
+	font-family: 'Ubuntu', sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+.title {
+    margin: auto;
+    width: 100px;
+}
+
+.general_container {
+	padding: 50px 0;
+}
+
+.menu {
+	width: 261px;
+    margin: auto;
+}
+
+.section {
+  display: inline-block;
+  font-size: 18px;
+  color: rgb(205,216,228);
+  text-decoration: none;
+  padding: .2em .8em;
+  margin: 15px 0;
+  outline: none;
+  border-right: 1px solid rgba(13,20,27,.5);
+  border-top: 1px solid rgba(270,278,287,.01);
+  background-color: rgb(64,73,82);
+  background-image:
+   radial-gradient(1px 60% at 0% 50%, rgba(255,255,255,.3), transparent),
+   radial-gradient(1px 60% at 100% 50%, rgba(255,255,255,.3), transparent),
+   linear-gradient(rgb(64,73,82), rgb(72,81,90));
+}
+
+.section:hover {
+  background-image:
+   radial-gradient(1px 60% at 0% 50%, rgba(255,255,255,.3), transparent),
+   radial-gradient(1px 60% at 100% 50%, rgba(255,255,255,.3), transparent),
+   linear-gradient(rgb(51,60,67), rgb(58,65,72));
+}
+
+.section:focus {
+  color: rgb(245,247,250);
+  border-top: 1px solid rgb(67,111,136);
+  background-image:
+   linear-gradient(rgb(46,95,122), rgb(36,68,92));
+}
+
+.section:focus:hover {
+  border-top: 1px solid rgb(49,87,107);
+  background-image:
+   linear-gradient(rgb(33,77,98), rgb(29,57,77));
+}
+
+.discription {
+	max-width: 900px;
+	margin: auto;
+}
+
+.uppercase {
+	text-transform: uppercase;
+	font-weight: 500;
+}
+
+.note {
+	font-size: small;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.copyright {
+	text-align: center;
+}
+
+.price {
+	font-weight: bold;
+}
+
+.footer {
+    position: fixed;
+    left: 0; bottom: 0;
+    padding: 10px;
+    background: #444D56;
+    color: #fff;
+    width: 100%;
+}
+
+/*****************
+	add page
+******************/
+
+.form_add {
+	width: 600px;
+	/* outline: 1px solid #666;*/
+	border: 2px solid #000;
+    border-radius: 3px;
+	padding: 20px;
+	margin: auto;
+}
+
+.form_add td {
+	margin: 40px 0;
+	font-size: 16px;
+	/*outline: 1px solid #EA4335;*/
+}
+
+.form_add td:FIRST-CHILD {
+	width: 150px;
+}
+
+.form_add td:LAST-CHILD {
+	width: 550px;
+}
+
+.form_add table {
+	border: none;
+}
+
+.input_field {
+	float: right;
+	display: inline-block;
+	width: 100%;
+}
+
+.selected {
+	padding: 3px;
+	margin-right: 2px;
+}
+
+.button {
+  position: relative;
+  display: inline-block;
+  float:right;
+  width: 10em;
+  height: 2.5em;
+  margin: 10px 0;
+  line-height: 2.4em;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  color: #000;
+  outline: none;
+  border: 1px solid rgba(110,121,128,.8);
+  border-top-color: rgba(0,0,0,.3);
+  border-radius: 5px;
+  background: rgb(206, 220, 231) linear-gradient(rgb(206,220,231), rgb(89,106,114));
+  box-shadow:
+   0 -1px rgba(10,21,28,.9) inset,
+   0 1px rgba(255,255,255,.5) inset;
+}
+
+.button:hover {
+  background: linear-gradient(#d2dfea, #71828c);
+}
+
+.button:active {
+  line-height: 2.6em;
+  background: linear-gradient(#bac6cf, #c5d3de 20%, #71828c);
+  box-shadow: 0 -1px rgba(255,255,255,.4) inset;
+}
+
+.button:before {
+  content: "";
+  position: absolute;
+  top: -10px; right: -10px; bottom: -10px; left: -10px;
+  z-index: -1;
+  border-radius: 8px;
+  background: linear-gradient(rgba(200,200,200,.5), rgba(240,240,240,.5));
+}
+
+.message_add{
+	width: 640px;
+    margin: auto;
+    padding-bottom: 10px;
+  /*  outline: 1px solid #EA4335;*/
+}
+
+.success_message{
+	color: #008000;
+}
+
+.error_message{
+	color: #FF0000;
+	font-weight: bold;
+}
+
+/*****************
+	dashboard page
+******************/
+
+.form_search {
+	width: 850px;
+    margin: auto;
+}
+
+.form_search input:FIRST-CHILD {
+	width: 690px;
+}
+
+.form_search input:LAST-CHILD {
+	width: 150px;
+}
+
+.table_search {
+	text-align: center;
+	border-collapse: collapse;
+    width: 850px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.table_search td {
+	border: 1px solid grey;
+}
+
+.table_search tr:FIRST-CHILD {
+	width: 30%;
+	font-weight: bold;
+}
+
+.table_search td:LAST-CHILD{
+	width: 20px;
+}
+
+.btn_delete {
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  user-select: none;
+  background: rgb(212,75,56); 
+  padding: .2em 1.5em;
+  outline: none; 
+  float: right;
+} 
+
+.btn_delete:hover { 
+	background: rgb(232,95,76); 
+	cursor: pointer;
+	} 
+	
+.btn_delete:active { background: rgb(152,15,0); }
+
+.pointer {
+	cursor: pointer;
+}
+
+.message_dashboard{
+    width: 850px;
+    margin: auto;
+    padding: 10px 0;
+}
+
+

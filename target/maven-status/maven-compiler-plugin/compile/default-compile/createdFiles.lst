@@ -1,0 +1,7 @@
+com\dao\ArtBoxStorage.class
+com\controller\DisplayServlet.class
+com\model\ArtBox.class
+com\controller\SearchServlet.class
+com\controller\HomeServlet.class
+com\controller\AddServlet.class
+com\controller\RemoveServlet.class
