@@ -37,6 +37,7 @@
 			<version>1.2</version>
 		</dependency>
 	</dependencies>
+	
 	<profiles>
 		<profile>
 			<id>Student</id>
@@ -44,10 +45,11 @@
 				<maven.tomcat.port>8080</maven.tomcat.port>
 			</properties>
 		</profile>
+		
 		<profile>
 			<id>Mentor</id>
 			<properties>
-				<maven.tomcat.port>8080</maven.tomcat.port>
+				<maven.tomcat.port>8181</maven.tomcat.port>
 			</properties>
 		</profile>
 	</profiles>
@@ -72,5 +74,6 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	
 	<packaging>war</packaging>
 </project>
