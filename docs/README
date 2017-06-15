@@ -36,4 +36,3 @@ delete and create new target directory with new war
 	- mvn clean install
 chek of work maven
 	-mvn –version
-
