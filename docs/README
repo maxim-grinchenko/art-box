@@ -1,39 +1,39 @@
-For create autodeploy, you nead :
+For create autodeploy, necessary :
 
 **** install last version apache-maven https://maven.apache.org/download.cgi
 **** install tomcat http://tomcat.apache.org/
 
 **** setting path in environment variables, e.g.:
-- MAVEN_HOME / E:\DEV\Maven\apache-maven-3.5.0
-- MAVEN / %MAVEN_HOME%\bin
+	- MAVEN_HOME / E:\DEV\Maven\apache-maven-3.5.0
+	- MAVEN / %MAVEN_HOME%\bin
 
 **** add in pom.xml:
 
-- tomcat7-maven-plugin (<groupId>org.apache.tomcat.maven</groupId>)
-- configuration: 
-	url - http://localhost:8080/manager/text, create name server, username, pass, path (/${project.build.finalName})
-	!!! add update - true (<update>true</update>)
+	- tomcat7-maven-plugin (<groupId>org.apache.tomcat.maven</groupId>)
+	- configuration: 
+		url - http://localhost:8080/manager/text, create name server, username, pass, path
+		!!! add update - true (<update>true</update>)
 
 **** add in tomcat-user.xml:
-- role rolename  manager-script / manager-gui
-- user username and pass
+	- role rolename  manager-script / manager-gui
+	- user username and pass
 
 **** add in setings.xml (apache-maven-3.X.X/conf/)
-- activeProfiles (if you used more two profiles)
+	- activeProfiles (if you used more two profiles)
 
 ------------------------------------------
 root cmd command 
 ------------------------------------------
 create deploy: 
-- mvn tomcat7:deploy
+	- mvn tomcat7:deploy
 checking active profiles created by â pom.xml
-- mvn help:active-profiles
+	- mvn help:active-profiles
 run / stop tomcat:
-- startup.bat / shutdown.bat
+	- startup.bat / shutdown.bat
 delete all artefact, target directory
-- mvn clean
+	- mvn clean
 delete and create new target directory with new war
-- mvn clean install
+	- mvn clean install
 chek of work maven
--mvn –version
+	-mvn –version
 
