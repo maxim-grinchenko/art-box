@@ -67,7 +67,6 @@
 			</activation>
 			<properties>
 				<tomcat.port>8080</tomcat.port>
-				<project.build.finalName>localhost</project.build.finalName>
 			</properties>
 		</profile>
 
@@ -75,7 +74,6 @@
 			<id>Mentor</id>
 			<properties>
 				<tomcat.port>8181</tomcat.port>
-				<project.build.finalName>localhost/mentor</project.build.finalName>
 			</properties>
 		</profile>
 	</profiles>
