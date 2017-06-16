@@ -19,7 +19,7 @@
 					<artifactId>tomcat7-maven-plugin</artifactId>
 					<version>2.2</version>
 					<configuration>
-						<url>http://localhost:${maven.tomcat.port}/manager/text</url>
+						<url>http://localhost:${tomcat.port}/manager/text</url>
 						<server>tomcat</server>
 						<update>true</update>
 						<username>deploy</username>
@@ -66,14 +66,16 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<maven.tomcat.port>8080</maven.tomcat.port>
+				<tomcat.port>8080</tomcat.port>
+				<project.build.finalName>localhost</project.build.finalName>
 			</properties>
 		</profile>
 
 		<profile>
 			<id>Mentor</id>
 			<properties>
-				<maven.tomcat.port>8181</maven.tomcat.port>
+				<tomcat.port>8181</tomcat.port>
+				<project.build.finalName>localhost/mentor</project.build.finalName>
 			</properties>
 		</profile>
 	</profiles>
