@@ -51,7 +51,7 @@ BASE COMMAND IN CONSOLE:
 # deploy by profile
 		- mvn tomcat7:deploy -PMentor
 		
-# delete all artefact, target directory
+# delete all artefacts in the 'target' directory"
 		- mvn clean
 		
 # delete and create new target directory with new war
