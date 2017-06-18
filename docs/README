@@ -30,8 +30,6 @@ Step - 2. Add configs files
 
 # copy-past settings from file "maven_settings.txt" in your %apache-maven-3.X.X%\conf\settings.xml
 
-# copy-past settings from file "pom.txt" in your \workspace\%name_project%\pom.xml
-
 
 Step - 3. Command line 
 
