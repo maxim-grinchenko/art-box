@@ -26,21 +26,21 @@
 
 			<table class="table_search">
 				<tr>
-					<td>#</td>
+					<td>####</td>
 					<td>Title</td>
 					<td>Age</td>
 					<td>Price</td>
 					<td></td>
 				</tr>
-				<c:forEach items="${products}" var="emp">
+				<c:forEach items="${products}" var="product">
 				<tr>
-					<td>${emp.getKey()}</td>
-					<td>${emp.name}</td>
-					<td>${emp.age}</td>
-					<td>${emp.cost}</td>
+					<td>${product.key}</td>
+					<td>${product.getValue().name}</td>
+					<td>${product.getValue().age}</td>
+					<td>${product.getValue().cost}</td>
 					<td>
 						<form action="remove" method="GET">
-							<input type="hidden" name="id" value="${emp.getKey()}"> 
+							<input type="hidden" name="id" value="${product.getKey()}"> 
 							<input type="submit" value="delete" class="btn_delete">
 						</form>
 					</td>
