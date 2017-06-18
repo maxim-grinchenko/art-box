@@ -35,9 +35,9 @@
 				<c:forEach items="${products}" var="emp">
 				<tr>
 					<td>${emp.getKey()}</td>
-					<td>${emp.getValue().getName()}</td>
-					<td>${emp.getValue().getAge()}</td>
-					<td>${emp.getValue().getCost()}</td>
+					<td>${emp.name}</td>
+					<td>${emp.age}</td>
+					<td>${emp.cost}</td>
 					<td>
 						<form action="remove" method="GET">
 							<input type="hidden" name="id" value="${emp.getKey()}"> 
