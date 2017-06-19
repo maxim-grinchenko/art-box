@@ -24,7 +24,7 @@
 						<update>true</update>
 						<username>deploy</username>
 						<password>deploy</password>
-						<path>/</path>
+						<path>/${project.build.finalName}</path>
 					</configuration>
 				</plugin>
 			</plugins>

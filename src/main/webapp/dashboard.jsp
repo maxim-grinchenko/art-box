@@ -26,7 +26,7 @@
 
 			<table class="table_search">
 				<tr>
-					<td>####</td>
+					<td>#</td>
 					<td>Title</td>
 					<td>Age</td>
 					<td>Price</td>
@@ -40,7 +40,7 @@
 					<td>${product.getValue().cost}</td>
 					<td>
 						<form action="remove" method="GET">
-							<input type="hidden" name="id" value="${product.getKey()}"> 
+							<input type="hidden" name="id" value="${product.key}"> 
 							<input type="submit" value="delete" class="btn_delete">
 						</form>
 					</td>
