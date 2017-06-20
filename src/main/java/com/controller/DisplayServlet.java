@@ -51,7 +51,7 @@ public class DisplayServlet extends HttpServlet {
 			log.info(message);
 		} else {
 			request.setAttribute(PRODUCTS, collectionsArtBox.entrySet());
-			log.info("Display collections ArtBox - ok!");
+			log.info("Display collections ArtBox...");
 		}
 		
 		request.setAttribute(MESSAGE_ATRIBUTE, message);
