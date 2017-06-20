@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.dao.ArtBoxStorage;
 import com.model.ArtBox;
 
@@ -27,6 +29,8 @@ public class RemoveServlet extends HttpServlet {
 	private static final String SUCCESS_REMOVED_AFTER = " was removed successfully!";
 	private static final String SUCCESS_REMOVED_BEFORE = "Product with id ";
 	private static final String SUCCESS_MASSAGE_ATRIBUTE = "success_message";
+	
+	private static final Logger log = Logger.getLogger(RemoveServlet.class);
 
     public RemoveServlet() {
         super();
@@ -50,10 +54,14 @@ public class RemoveServlet extends HttpServlet {
 			message = SUCCESS_REMOVED_BEFORE + id + SUCCESS_REMOVED_AFTER;
 			typeAtribute = SUCCESS_MASSAGE_ATRIBUTE;
 			
+			log.info(message);
+			
 		} catch (NumberFormatException e) {
 			message = ERROR_WRONG;
+			log.error(message, e);
 		} catch (NullPointerException e) {
 			message = ERROR_NOT_FOUND;
+			log.error(message, e);
 		}
 		
 		request.setAttribute(MESSAGE_ATRIBUTE, message);

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.dao.ArtBoxStorage;
 import com.model.ArtBox;
 
@@ -29,6 +31,8 @@ public class SearchServlet extends HttpServlet {
 	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
 	private static final String SUCCESS_FOUND = "List of found : ";	
 	private static final String SUCCESS_MASSAGE_ATRIBUTE = "success_message";
+	
+	private static final Logger log = Logger.getLogger(RemoveServlet.class);
        
     public SearchServlet() {
         super();
@@ -55,13 +59,19 @@ public class SearchServlet extends HttpServlet {
 				typeAtribute = SUCCESS_MASSAGE_ATRIBUTE;
 
 				notFound = false;
+				
+				log.info(message);
 			}
 
-			if (notFound)
+			if (notFound){
 				message = ERROR_NO_DB_BEGIN + name + ERROR_NO_DB_AFTER;
+				log.info(message);
+			}
+				
 
 		} catch (NullPointerException e) {
 			message = ERROR_WRONG;
+			log.error(message, e);
 			response.sendRedirect(DASHBOARD_PAGE);
 		}
 

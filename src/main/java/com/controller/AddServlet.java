@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.dao.ArtBoxStorage;
 import com.model.ArtBox;
 
@@ -21,13 +23,15 @@ public class AddServlet extends HttpServlet {
 	private static final String ADD_PAGE = "add.jsp";
 	private static final String MESSAGE_ATRIBUTE = "message";
 	private static final String TYPE = "type";
-	private static final String ERROR_MASSAGE_PARAMETER = "Error with parameters!";
+	private static final String ERROR_MASSAGE_PARAMETER = "Error with parameters! : ";
 	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
 	private static final String ERROR_MASSAGE_BEGIN = "Error! Product ";
 	private static final String ERROR_MASSAGE_END = " can't be added due to ";
 	private static final String SUCCESS_MASSAGE_BEGIN = "Success! Pruduct ";
 	private static final String SUCCESS_MASSAGE_END = " was added.";
 	private static final String SUCCESS_MASSAGE_ATRIBUTE = "success_message";
+	
+	private static final Logger log = Logger.getLogger(AddServlet.class);
 
 	public AddServlet() {
 		super();
@@ -56,20 +60,27 @@ public class AddServlet extends HttpServlet {
 			int cost = Integer.parseInt(request.getParameter(ARTBOX_COST));
 
 			if (isValidedParameters(name, age, cost)) {
-				message = ERROR_MASSAGE_BEGIN + name + ERROR_MASSAGE_END;
+				message = ERROR_MASSAGE_PARAMETER 
+							+ " name 	: " + name 
+							+ " age 	: " + age 
+							+ " cost 	: " + cost;
+				log.warn(message);
 			} else {
 
 				ArtBox newArtBox = new ArtBox(name, age, cost);
 
 				ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
 				artboxStorage.addedBase(newArtBox);
-
+				
 				message = SUCCESS_MASSAGE_BEGIN + name + SUCCESS_MASSAGE_END;
 				typeAtribute = SUCCESS_MASSAGE_ATRIBUTE;
+				
+				log.info(message);
 			}
 
 		} catch (NumberFormatException e) {
 			message = ERROR_MASSAGE_PARAMETER;
+			log.error(e);
 		}
 
 		request.setAttribute(MESSAGE_ATRIBUTE, message);
