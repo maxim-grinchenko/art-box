@@ -6,6 +6,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.log4j.Logger;
+
 import com.model.ArtBox;
 
 public class ArtBoxStorage {
@@ -13,6 +15,8 @@ public class ArtBoxStorage {
 	private Map<Integer, ArtBox> unitBox = new ConcurrentHashMap<Integer, ArtBox>();
 	private static ArtBoxStorage instance;
 	private AtomicInteger counter = new AtomicInteger(0);
+	
+	private static final Logger log = Logger.getLogger(ArtBoxStorage.class);
 
 	private ArtBoxStorage() {
 	}
@@ -28,7 +32,7 @@ public class ArtBoxStorage {
 		Integer id = null;
 		id = counter.incrementAndGet();
 		this.unitBox.put(id, newArtbox);
-		System.out.println("id : " + id + " " + newArtbox);
+		log.info("put new ArtBox in database..." + "");
 	}
 
 	public Map<Integer, ArtBox> removedBase() {
@@ -46,6 +50,7 @@ public class ArtBoxStorage {
 		for (Map.Entry<Integer, ArtBox> findArtBox : unitBox.entrySet()) {
 			if (findArtBox.getValue().getName().equalsIgnoreCase(searchArtBoxByName)) {
 				serchCollection.put(findArtBox.getKey(), findArtBox.getValue());
+				log.info("serch collection in database...");
 			}
 		}
 		return serchCollection.isEmpty() ? null : serchCollection.entrySet();

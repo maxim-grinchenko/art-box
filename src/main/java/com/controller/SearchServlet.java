@@ -44,23 +44,25 @@ public class SearchServlet extends HttpServlet {
 		String typeAtribute = ERROR_MESSAGE_ATRIBUTE;
 
 		try {
-			System.out.println(request.getParameter(ARTBOX_THEME));
 			String name = request.getParameter(ARTBOX_THEME);
-
+			log.debug("get search parameter : " + name);
+			
 			ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
 			Set<Map.Entry<Integer, ArtBox>> findArtBoxCollections = artboxStorage.findArtBoxByName(name);
-
+			log.info("find parameter in arbox storage");
+			
 			boolean notFound = true;
 
 			if (findArtBoxCollections != null) {
+				log.info("collections arbox not null");
+				
 				request.setAttribute(PRODUCTS, findArtBoxCollections);
 
 				message = SUCCESS_FOUND + name;
 				typeAtribute = SUCCESS_MASSAGE_ATRIBUTE;
-
-				notFound = false;
-				
 				log.info(message);
+				
+				notFound = false;
 			}
 
 			if (notFound){
@@ -68,10 +70,12 @@ public class SearchServlet extends HttpServlet {
 				log.info(message);
 			}
 				
+			log.debug("Displaying of found parameters...");
 
 		} catch (NullPointerException e) {
 			message = ERROR_WRONG;
 			log.error(message, e);
+			
 			response.sendRedirect(DASHBOARD_PAGE);
 		}
 

@@ -23,7 +23,7 @@ public class AddServlet extends HttpServlet {
 	private static final String ADD_PAGE = "add.jsp";
 	private static final String MESSAGE_ATRIBUTE = "message";
 	private static final String TYPE = "type";
-	private static final String ERROR_MASSAGE_PARAMETER = "Error with parameters! : ";
+	private static final String ERROR_MASSAGE_PARAMETER = "Error with parameters!";
 	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
 	private static final String ERROR_MASSAGE_BEGIN = "Error! Product ";
 	private static final String ERROR_MASSAGE_END = " can't be added due to ";
@@ -58,6 +58,8 @@ public class AddServlet extends HttpServlet {
 			String name = request.getParameter(ARTBOX_NAME);
 			int age = Integer.parseInt(request.getParameter(ARTBOX_AGE));
 			int cost = Integer.parseInt(request.getParameter(ARTBOX_COST));
+			
+			log.debug("get params...");
 
 			if (isValidedParameters(name, age, cost)) {
 				message = ERROR_MASSAGE_PARAMETER 
@@ -80,7 +82,7 @@ public class AddServlet extends HttpServlet {
 
 		} catch (NumberFormatException e) {
 			message = ERROR_MASSAGE_PARAMETER;
-			log.error(e);
+			log.error(message);
 		}
 
 		request.setAttribute(MESSAGE_ATRIBUTE, message);

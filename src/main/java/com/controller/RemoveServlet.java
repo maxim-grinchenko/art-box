@@ -44,9 +44,12 @@ public class RemoveServlet extends HttpServlet {
 		try {
 			int id = Integer.parseInt(request.getParameter(ARTBOX_ID));
 
+			log.debug("Get parameter to delete: " + id);
+			
 			ArtBoxStorage storage = ArtBoxStorage.getInstance();
 			Map<Integer, ArtBox> unitBox = storage.removedBase();
-
+			log.info("removing id " + id + " from database...");
+			
 			unitBox.remove(id);
 			
 			request.setAttribute(PRODUCTS, unitBox.entrySet());
@@ -59,9 +62,11 @@ public class RemoveServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			message = ERROR_WRONG;
 			log.error(message, e);
+			
 		} catch (NullPointerException e) {
 			message = ERROR_NOT_FOUND;
 			log.error(message, e);
+			
 		}
 		
 		request.setAttribute(MESSAGE_ATRIBUTE, message);
