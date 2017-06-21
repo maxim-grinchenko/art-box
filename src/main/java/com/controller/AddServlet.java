@@ -92,9 +92,8 @@ public class AddServlet extends HttpServlet {
 		request.getRequestDispatcher(ADD_PAGE).forward(request, response);
 	}
 	
-	private boolean isValidedParameters(int age, double cost) {
-			if(cost>0 && age>0) return false;			
-		return true;
+	private boolean isValidedParameters(int age, double cost) {	
+		return cost > 0 && age > 0 ? false : true;
 	}
 	
 }
