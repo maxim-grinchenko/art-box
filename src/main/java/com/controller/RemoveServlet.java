@@ -47,26 +47,20 @@ public class RemoveServlet extends HttpServlet {
 			log.debug("Get parameter to delete: " + id);
 			
 			ArtBoxStorage storage = ArtBoxStorage.getInstance();
-			Map<Integer, ArtBox> unitBox = storage.removedBase();
-			log.info("removing id " + id + " from database...");
-			
-			unitBox.remove(id);
+			Map<Integer, ArtBox> unitBox = storage.removedBase(id);
 			
 			request.setAttribute(PRODUCTS, unitBox.entrySet());
 			
 			message = SUCCESS_REMOVED_BEFORE + id + SUCCESS_REMOVED_AFTER;
 			typeAtribute = SUCCESS_MASSAGE_ATRIBUTE;
-			
-			log.info(message);
+			log.debug(message);
 			
 		} catch (NumberFormatException e) {
 			message = ERROR_WRONG;
 			log.error(message, e);
-			
 		} catch (NullPointerException e) {
 			message = ERROR_NOT_FOUND;
 			log.error(message, e);
-			
 		}
 		
 		request.setAttribute(MESSAGE_ATRIBUTE, message);

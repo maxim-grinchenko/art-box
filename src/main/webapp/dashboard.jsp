@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ArtBox</title>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
@@ -28,14 +28,14 @@
 				<tr>
 					<td>#</td>
 					<td>Title</td>
-					<td>Age</td>
+					<td>Age, from</td>
 					<td>Price</td>
 					<td></td>
 				</tr>
 				<c:forEach items="${products}" var="product">
 				<tr>
 					<td>${product.key}</td>
-					<td>${product.getValue().name}</td>
+					<td class="table_name">${product.getValue().name}</td>
 					<td>${product.getValue().age}</td>
 					<td>${product.getValue().cost}</td>
 					<td>

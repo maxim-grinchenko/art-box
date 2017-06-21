@@ -49,7 +49,6 @@ public class SearchServlet extends HttpServlet {
 			
 			ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
 			Set<Map.Entry<Integer, ArtBox>> findArtBoxCollections = artboxStorage.findArtBoxByName(name);
-			log.info("find parameter in arbox storage");
 			
 			boolean notFound = true;
 
@@ -60,14 +59,12 @@ public class SearchServlet extends HttpServlet {
 
 				message = SUCCESS_FOUND + name;
 				typeAtribute = SUCCESS_MASSAGE_ATRIBUTE;
-				log.info(message);
 				
 				notFound = false;
 			}
 
 			if (notFound){
 				message = ERROR_NO_DB_BEGIN + name + ERROR_NO_DB_AFTER;
-				log.info(message);
 			}
 				
 			log.debug("Displaying of found parameters...");

@@ -4,9 +4,9 @@ public class ArtBox {
 	
 	private String name;
 	private int age;
-	private int cost;
+	private double cost;
 	
-	public ArtBox (String name, int age, int cost){
+	public ArtBox (String name, int age, double cost){
 		this.name = name;
 		this.age = age;
 		this.cost = cost;
@@ -28,7 +28,7 @@ public class ArtBox {
 		this.age = age;
 	}
 
-	public int getCost() {
+	public double getCost() {
 		return cost;
 	}
 

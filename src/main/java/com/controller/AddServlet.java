@@ -25,8 +25,8 @@ public class AddServlet extends HttpServlet {
 	private static final String TYPE = "type";
 	private static final String ERROR_MASSAGE_PARAMETER = "Error with parameters!";
 	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
-	private static final String ERROR_MASSAGE_BEGIN = "Error! Product ";
-	private static final String ERROR_MASSAGE_END = " can't be added due to ";
+//	private static final String ERROR_MASSAGE_BEGIN = "Error! Product ";
+//	private static final String ERROR_MASSAGE_END = " can't be added due to ";
 	private static final String SUCCESS_MASSAGE_BEGIN = "Success! Pruduct ";
 	private static final String SUCCESS_MASSAGE_END = " was added.";
 	private static final String SUCCESS_MASSAGE_ATRIBUTE = "success_message";
@@ -50,24 +50,20 @@ public class AddServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
 
 		String message;
 		String typeAtribute = ERROR_MESSAGE_ATRIBUTE;
 
 		try {
+			
 			String name = request.getParameter(ARTBOX_NAME);
 			int age = Integer.parseInt(request.getParameter(ARTBOX_AGE));
-			int cost = Integer.parseInt(request.getParameter(ARTBOX_COST));
+			double cost = Double.parseDouble((request.getParameter(ARTBOX_COST)).replaceAll(" ","").replace(',','.'));
 			
-			log.debug("get params...");
-
-			if (isValidedParameters(name, age, cost)) {
-				message = ERROR_MASSAGE_PARAMETER 
-							+ " name 	: " + name 
-							+ " age 	: " + age 
-							+ " cost 	: " + cost;
-				log.warn(message);
-			} else {
+			log.debug("get params... name - " + name + "; age - " + age + "; cost - " + cost);
 
 				ArtBox newArtBox = new ArtBox(name, age, cost);
 
@@ -77,8 +73,7 @@ public class AddServlet extends HttpServlet {
 				message = SUCCESS_MASSAGE_BEGIN + name + SUCCESS_MASSAGE_END;
 				typeAtribute = SUCCESS_MASSAGE_ATRIBUTE;
 				
-				log.info(message);
-			}
+				log.debug(message);
 
 		} catch (NumberFormatException e) {
 			message = ERROR_MASSAGE_PARAMETER;
@@ -89,10 +84,4 @@ public class AddServlet extends HttpServlet {
 		request.setAttribute(TYPE,typeAtribute);
 		request.getRequestDispatcher(ADD_PAGE).forward(request, response);
 	}
-
-	private boolean isValidedParameters(String name, int age, int cost) {
-		// TODO Write validation of input data for String name, int age, int cost
-		return false;
-	}
-
 }

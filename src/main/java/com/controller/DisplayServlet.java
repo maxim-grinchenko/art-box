@@ -43,18 +43,17 @@ public class DisplayServlet extends HttpServlet {
 		ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
 		Map<Integer, ArtBox> collectionsArtBox = artboxStorage.getAll();
 		
-		String message = ""; //TODO Identify message!
 		String typeAtribute = ERROR_MESSAGE_ATRIBUTE;
 
 		if (collectionsArtBox.isEmpty() || collectionsArtBox == null) {
-			message = LIST_IS_EMPTY;
-			log.info(message);
+			request.setAttribute(MESSAGE_ATRIBUTE, LIST_IS_EMPTY);
+			log.debug(LIST_IS_EMPTY);
 		} else {
 			request.setAttribute(PRODUCTS, collectionsArtBox.entrySet());
-			log.info("Display collections ArtBox...");
+			log.debug("Display collections ArtBox...");
 		}
 		
-		request.setAttribute(MESSAGE_ATRIBUTE, message);
+		
 		request.setAttribute(TYPE, typeAtribute);
 		request.getRequestDispatcher(DASHBOARD_PAGE).forward(request, response);
 	}
