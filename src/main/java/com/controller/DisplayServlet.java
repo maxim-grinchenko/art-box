@@ -53,7 +53,6 @@ public class DisplayServlet extends HttpServlet {
 			log.debug("Display collections ArtBox...");
 		}
 		
-		
 		request.setAttribute(TYPE, typeAtribute);
 		request.getRequestDispatcher(DASHBOARD_PAGE).forward(request, response);
 	}
