@@ -35,8 +35,10 @@ public class ArtBoxStorage {
 		log.info("put new ArtBox in database..." + "");
 	}
 
-	public Map<Integer, ArtBox> removedBase() {
-		return this.unitBox;
+	public Map<Integer, ArtBox> removedBase(int id) {
+		unitBox.remove(id);
+		log.info("removing id " + id + " from database...");
+		return unitBox;
 	}
 
 	public Map<Integer, ArtBox> getAll() {

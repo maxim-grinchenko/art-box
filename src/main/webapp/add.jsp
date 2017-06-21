@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ArtBox</title>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
@@ -26,7 +26,7 @@
 						<td><input type="text" name="name" value="qwe" class="input_field" placeholder="Please, input title..."></td>
 					</tr>
 					<tr>
-						<td>Age : </td>
+						<td>Age, from : </td>
 						<td><input type="text" name="age" value="1" class="input_field" placeholder="Please, input age..."></td>
 					</tr>
 					<tr>
