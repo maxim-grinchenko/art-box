@@ -24,6 +24,7 @@ public class AddServlet extends HttpServlet {
 	private static final String MESSAGE_ATRIBUTE = "message";
 	private static final String TYPE = "type";
 	private static final String ERROR_MASSAGE_PARAMETER = "Error with parameters!";
+	private static final String INVALID_MASSAGE_PARAMETER = " It can't be negative!";
 	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
 //	private static final String ERROR_MASSAGE_BEGIN = "Error! Product ";
 //	private static final String ERROR_MASSAGE_END = " can't be added due to ";
@@ -60,20 +61,26 @@ public class AddServlet extends HttpServlet {
 		try {
 			
 			String name = request.getParameter(ARTBOX_NAME);
-			String age = request.getParameter(ARTBOX_AGE);
+			int age = Integer.parseInt(request.getParameter(ARTBOX_AGE));
 			double cost = Double.parseDouble((request.getParameter(ARTBOX_COST)).replaceAll(" ","").replace(',','.'));
 			
 			log.debug("get params... name - " + name + "; age - " + age + "; cost - " + cost);
+
+			if (isValidedParameters(age, cost)) {
+				message = ERROR_MASSAGE_PARAMETER + INVALID_MASSAGE_PARAMETER;
+				log.warn(message);
+			} else {
 
 				ArtBox newArtBox = new ArtBox(name, age, cost);
 
 				ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
 				artboxStorage.addedBase(newArtBox);
-				
+
 				message = SUCCESS_MASSAGE_BEGIN + name + SUCCESS_MASSAGE_END;
 				typeAtribute = SUCCESS_MASSAGE_ATRIBUTE;
-				
+
 				log.debug(message);
+			}
 
 		} catch (NumberFormatException e) {
 			message = ERROR_MASSAGE_PARAMETER;
@@ -84,4 +91,10 @@ public class AddServlet extends HttpServlet {
 		request.setAttribute(TYPE,typeAtribute);
 		request.getRequestDispatcher(ADD_PAGE).forward(request, response);
 	}
+	
+	private boolean isValidedParameters(int age, double cost) {
+			if(cost>0 && age>0) return false;			
+		return true;
+	}
+	
 }

@@ -3,10 +3,10 @@ package com.model;
 public class ArtBox {
 	
 	private String name;
-	private String age;
+	private int age;
 	private double cost;
 	
-	public ArtBox (String name, String age, double cost){
+	public ArtBox (String name, int age, double cost){
 		this.name = name;
 		this.age = age;
 		this.cost = cost;
@@ -20,11 +20,11 @@ public class ArtBox {
 		this.name = name;
 	}
 
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
