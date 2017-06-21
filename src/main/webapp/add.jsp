@@ -23,15 +23,15 @@
 				<table>
 					<tr>
 						<td>Title : </td>
-						<td><input type="text" name="name" value="qwe" class="input_field" placeholder="Please, input title..."></td>
+						<td><input type="text" name="name" value="" class="input_field" placeholder="Please, input title..."></td>
 					</tr>
 					<tr>
 						<td>Age, from : </td>
-						<td><input type="text" name="age" value="1" class="input_field" placeholder="Please, input age..."></td>
+						<td><input type="text" name="age" value="" class="input_field" placeholder="Please, input age..."></td>
 					</tr>
 					<tr>
 						<td>Price : </td>
-						<td><input type="text" name="cost" value="2" class="input_field" placeholder="Please, input price..."></td>
+						<td><input type="text" name="cost" value="" class="input_field" placeholder="Please, input price..."></td>
 					</tr>
 					<tr>
 						<td colspan="2"><input type="submit" value="Save" class="button pointer"></td>

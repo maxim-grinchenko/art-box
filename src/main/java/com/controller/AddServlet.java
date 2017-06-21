@@ -60,7 +60,7 @@ public class AddServlet extends HttpServlet {
 		try {
 			
 			String name = request.getParameter(ARTBOX_NAME);
-			int age = Integer.parseInt(request.getParameter(ARTBOX_AGE));
+			String age = request.getParameter(ARTBOX_AGE);
 			double cost = Double.parseDouble((request.getParameter(ARTBOX_COST)).replaceAll(" ","").replace(',','.'));
 			
 			log.debug("get params... name - " + name + "; age - " + age + "; cost - " + cost);
