@@ -39,6 +39,7 @@ You are now all set to use Apache Maven for your projects.
 * open console in `%tomcat-home%\bin\` and input command `startup.bat` or `catalina.bat run`
 
 * open console in `\workspace\%name_project%\` and input command `mvn tomcat7:deploy`.
+
 Should be output **BUILD SUCCESS**.
 	
 	
