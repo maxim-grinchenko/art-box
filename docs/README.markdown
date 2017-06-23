@@ -3,13 +3,11 @@
 
 ### Step - 1. Installed and Environment variables
 
-* if you do not have Java installed, install the Java Software Development Kit (SDK) from
+* if you do not have Java installed, install the [Java Software Development Kit] (SDK)(http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
-  http://www.oracle.com/technetwork/java/javase/downloads/index.html
+* download and setup [apache-maven] (https://maven.apache.org/download.cgi)
 
-* download and setup apache-maven https://maven.apache.org/download.cgi
-
-* download and setup tomcat http://tomcat.apache.org/
+* download and setup [tomcat] (http://tomcat.apache.org/)
 
 * add path in environment variables
 
