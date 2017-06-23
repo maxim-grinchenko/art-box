@@ -14,7 +14,7 @@
 
 * open console and input command `mvn -version`. Should be output something:
 
-```
+```java
 Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T17:27:37+05:30)
 Maven home: C:\Program Files\Apache Software Foundation\apache-maven-3.3.3
 Java version: 1.7.0_75, vendor: Oracle Corporation
@@ -39,7 +39,7 @@ You are now all set to use Apache Maven for your projects.
 * open console in `%tomcat-home%\bin\` and input command `startup.bat` or `catalina.bat run`
 
 * open console in `\workspace\%name_project%\` and input command `mvn tomcat7:deploy`.
-Should be output `"BUILD SUCCESS"`.
+Should be output **BUILD SUCCESS**.
 	
 	
 ### `BASE COMMAND IN CONSOLE:`
