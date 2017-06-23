@@ -1,17 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.artbox.web</groupId>
-	<artifactId>artBoxMaven</artifactId>
-
+	<groupId>com</groupId>
+	<artifactId>art-box-mvn</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ArtBoxMaven Maven Webapp</name>
-	<url>http://maven.apache.org</url>
-
+	
 	<packaging>war</packaging>
-
+	
 	<build>
-		<finalName>ArtBoxMaven</finalName>
+		<finalName>art-box-mvn</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -19,6 +17,8 @@
 					<artifactId>tomcat7-maven-plugin</artifactId>
 					<version>2.2</version>
 					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
 						<url>http://localhost:${tomcat.port}/manager/text</url>
 						<server>tomcat</server>
 						<update>true</update>
@@ -59,9 +59,9 @@
 		</dependency>
 
 		<dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
 		</dependency>
 
 	</dependencies>
@@ -84,5 +84,4 @@
 			</properties>
 		</profile>
 	</profiles>
-
 </project>
