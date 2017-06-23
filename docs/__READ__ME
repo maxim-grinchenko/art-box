@@ -43,7 +43,7 @@ BASE COMMAND IN CONSOLE:
 # stopped server
 		- shutdown.bat or shortcut "Ctrl+C" 
 
-# checking active profiles created by â pom.xml
+# checking active profiles created by Ã¢ pom.xml
 		- mvn help:active-profiles
 
 # deploy by profile
