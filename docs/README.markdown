@@ -44,21 +44,25 @@ You are now all set to use Apache Maven for your projects.
   Should be output **BUILD SUCCESS**.
 	
 	
-### `BASE COMMAND IN CONSOLE:`
+#### `BASE COMMAND IN CONSOLE:`
 * stopped server
-		 `shutdown.bat` or shortcut "Ctrl+C"
+		 
+	`shutdown.bat` or shortcut "Ctrl+C"
 
 * checking active profiles created by a pom.xml
-		 `mvn help:active-profiles`
+		 
+	`mvn help:active-profiles`
 
 * deploy by profile
-		 `mvn tomcat7:deploy -PMentor`
+		 
+	`mvn tomcat7:deploy -PMentor`
 		
 * delete all artefacts in the 'target' directory"
-`mvn clean`
+
+	`mvn clean`
 		
 * delete and create new target directory with new war 
 
-`mvn clean install`
+	`mvn clean install`
 		
 
