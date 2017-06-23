@@ -39,7 +39,7 @@ You are now all set to use Apache Maven for your projects.
 * open console in `%tomcat-home%\bin\` and input command `startup.bat` or `catalina.bat run`
 
 * open console in `\workspace\%name_project%\` and input command `mvn tomcat7:deploy`
-	Should be output "#####BUILD SUCCESS"
+Should be output "BUILD SUCCESS"
 	
 	
 ### `BASE COMMAND IN CONSOLE:`
@@ -53,7 +53,7 @@ You are now all set to use Apache Maven for your projects.
 		 `mvn tomcat7:deploy -PMentor`
 		
 * delete all artefacts in the 'target' directory"
-		 `mvn clean`
+`mvn clean`
 		
 * delete and create new target directory with new war
 		 `mvn clean install`
