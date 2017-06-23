@@ -3,7 +3,8 @@
 
 ### Step - 1. Installed and Environment variables
 
-* if you do not have Java installed, install the Java Software Development Kit (SDK) from 
+* if you do not have Java installed, install the Java Software Development Kit (SDK) from
+
   http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 * download and setup apache-maven https://maven.apache.org/download.cgi
@@ -40,7 +41,7 @@ You are now all set to use Apache Maven for your projects.
 
 * open console in `\workspace\%name_project%\` and input command `mvn tomcat7:deploy`.
 
-Should be output **BUILD SUCCESS**.
+  Should be output **BUILD SUCCESS**.
 	
 	
 ### `BASE COMMAND IN CONSOLE:`
@@ -56,7 +57,8 @@ Should be output **BUILD SUCCESS**.
 * delete all artefacts in the 'target' directory"
 `mvn clean`
 		
-* delete and create new target directory with new war
-		 `mvn clean install`
+* delete and create new target directory with new war 
+
+`mvn clean install`
 		
 
