@@ -14,13 +14,12 @@
 		<div class="menu">
 			<%@include file="menu.jsp"%>
 		</div>
+		
 
 		<div class="discription">
-<!-- 		<button id="myBtn">Open Modal</button> -->
-
-		<div class="autorisation">
-			<%@include file="registration.jsp"%>
-		</div>
+		<p class="${type_register}">${message_register}</p>
+		<p class="block_message_register ${type_hidden}"><b>Before using this resource you need to </b><a href="registration.jsp" class="section">login or register</a></p>
+		
 			<p>Description ArtBox web-service:</p>
 			<p>The service is used for create, delete and search positions goods (further positions).</p>
 			<p>The page "<span class="uppercase">add</span>" is used to added positions.</p>
@@ -53,51 +52,12 @@
 		</div>
 	</div>
 	
-<!-- 	<div id="myModal" class="modal"> -->
-<!--   <div class="modal-content"> -->
-<!-- 		<span class="close">&times;</span> -->
-<!--   <div id="navthing"> -->
-<!--       <h2><a href="#" id="loginform">Login</a> or <a href="#" id="registerform">Register</a></h2> -->
-<!-- 		<div class="login"> -->
-<!-- 		  <div class="formholder"> -->
-<!-- 			<div class="randompad"> -->
-<!-- 			   <fieldset> -->
-<!-- 				 <label name="email">Email</label> -->
-<!-- 				 <input type="email" value="" placeholder="example@example.com"/> -->
-<!-- 				 <label name="password">Password</label> -->
-<!-- 				 <input type="password" placeholder="input your password"/> -->
-<!-- 				 <input type="submit" value="Login" /> -->
-<!-- 			   </fieldset> -->
-<!-- 			</div> -->
-<!-- 		  </div> -->
-<!-- 		</div> -->
-	
-<!-- 		<div class="register"> -->
-<!-- 		  <div class="formholder"> -->
-<!-- 			<div class="randompad"> -->
-<!-- 			   <fieldset> -->
-<!-- 				 <label name="email">Email</label> -->
-<!-- 				 <input type="email" value="" placeholder="example@example.com"/> -->
-<!-- 				 <label name="password">Password</label> -->
-<!-- 				 <input type="password" placeholder="input your password"/> -->
-<!-- 				 <input type="password" placeholder="confirm your password"/> -->
-<!-- 				 <input type="submit" value="Registration" /> -->
-<!-- 			   </fieldset> -->
-<!-- 			</div> -->
-<!-- 		  </div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!--   </div> -->
-<!-- </div>  -->
+
 
 	<div class="footer">
 		<p class="copyright">&#169; GM ArtBoxSystems (Brovary)</p>
 	</div>
 	
 
-
-<!-- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
-<!-- <script src="js/index.js"></script> -->
-<!-- <script src="js/script_popup.js"></script> -->
 </body>
 </html>

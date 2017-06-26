@@ -23,14 +23,12 @@ public class AddServlet extends HttpServlet {
 	private static final String REDIRECT_PAGE = "add.jsp";
 	private static final String MESSAGE_ATRIBUTE = "message";
 	private static final String TYPE = "type";
-	private static final String ERROR_MASSAGE_PARAMETER = "Error with parameters!";
-	private static final String INVALID_MASSAGE_PARAMETER = " It can't be negative!";
-	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
-//	private static final String ERROR_MASSAGE_BEGIN = "Error! Product ";
-//	private static final String ERROR_MASSAGE_END = " can't be added due to ";
+	private static final String ERROR_MASSAGE = "Error with parameters!";
+	private static final String INVALID_MASSAGE = " It can't be negative!";
 	private static final String SUCCESS_MASSAGE_BEGIN = "Success! Pruduct ";
 	private static final String SUCCESS_MASSAGE_END = " was added.";
-	private static final String SUCCESS_MASSAGE_ATRIBUTE = "success_message";
+	private static final String SUCCESS_ATRIBUTE = "success_message";
+	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
 	
 	private static final Logger log = Logger.getLogger(AddServlet.class);
 
@@ -56,7 +54,7 @@ public class AddServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 
 		String message;
-		String typeAtribute = ERROR_MESSAGE_ATRIBUTE;
+		String messageType = ERROR_MESSAGE_ATRIBUTE;
 
 		try {
 			
@@ -67,7 +65,7 @@ public class AddServlet extends HttpServlet {
 			log.debug("get params... name - " + name + "; age - " + age + "; cost - " + cost);
 
 			if (isValidedParameters(age, cost)) {
-				message = ERROR_MASSAGE_PARAMETER + INVALID_MASSAGE_PARAMETER;
+				message = ERROR_MASSAGE + INVALID_MASSAGE;
 				log.warn(message);
 			} else {
 
@@ -77,18 +75,18 @@ public class AddServlet extends HttpServlet {
 				artboxStorage.addedBase(newArtBox);
 
 				message = SUCCESS_MASSAGE_BEGIN + name + SUCCESS_MASSAGE_END;
-				typeAtribute = SUCCESS_MASSAGE_ATRIBUTE;
+				messageType = SUCCESS_ATRIBUTE;
 
 				log.debug(message);
 			}
 
 		} catch (NumberFormatException e) {
-			message = ERROR_MASSAGE_PARAMETER;
+			message = ERROR_MASSAGE;
 			log.error(message);
 		}
 
 		request.setAttribute(MESSAGE_ATRIBUTE, message);
-		request.setAttribute(TYPE,typeAtribute);
+		request.setAttribute(TYPE,messageType);
 		request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
 	}
 	

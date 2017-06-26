@@ -1,7 +1,6 @@
 package com.filters;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
@@ -17,20 +16,22 @@ import org.apache.log4j.Logger;
 import com.controller.RegistrationServlet;
 
 @WebFilter("/registration")
-public class RegestrationEmailFilter implements Filter {
+public class RegistrationEmailFilter implements Filter {
 	
-	private static final String REDIRECT_PAGE = "home.jsp";
+	private static final String REDIRECT_PAGE = "registration.jsp";
 	private static final String EMAIL = "email";
-	private static final String SUCCESS_MASSAGE = "Success!";
-	private static final String ERROR_MASSAGE_PARAMETER = "Error with parameters!";
+	private static final String SUCCESS_MESSAGE = "Success!";
+	private static final String ERROR_MESSAGE = "Your email is incorrect!";
 	private static final String EMAIL_NOT_VALID = "email is not valid!";
-	private static final String MESSAGE_ATRIBUTE = "message";
-	private static final String TYPE = "type";
+	private static final String MESSAGE_ATRIBUTE = "message_reg_email";
+	private static final String ERROR_TYPE = "error_message_reg";
+	private static final String TYPE_ATRIBUTE = "type_reg_email";
+	private static final String SUCCESS_TYPE = "success_message";
 	private static final String EMAIL_REGEX = "^([\\w\\.\\-_]+)?\\w+@[\\w-_]+(\\.\\w+){1,}$";
 	
 	private static final Logger log = Logger.getLogger(RegistrationServlet.class);
 
-    public RegestrationEmailFilter() {
+    public RegistrationEmailFilter() {
     }
 
 	public void destroy() {
@@ -42,19 +43,22 @@ public class RegestrationEmailFilter implements Filter {
 		
 		log.debug("get param RegestrationEmailFilter... " + " email : " + email);
 		
-		Pattern pattern = Pattern.compile(EMAIL_REGEX);
-		Matcher matcher = pattern.matcher(email);
+		String message = ERROR_MESSAGE;
+		String type = ERROR_TYPE;
 		
-		log.debug(matcher);
-		
-		if (matcher.find()) {
-			log.debug(SUCCESS_MASSAGE);
+		if (Pattern.matches(EMAIL_REGEX, email)) {
+			log.debug(SUCCESS_MESSAGE);
+			
+			message = SUCCESS_MESSAGE;
+			type = SUCCESS_TYPE;
+			
 			chain.doFilter(request, response);
 		} else {
 			log.debug(EMAIL_NOT_VALID);
-			
+			request.setAttribute(MESSAGE_ATRIBUTE, message);
+			request.setAttribute(TYPE_ATRIBUTE, type);
+			request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
 		}
-		request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

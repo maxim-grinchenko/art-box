@@ -10,3 +10,5 @@
 .settings/org.eclipse.wst.validation.prefs
 .target/
 target/
+src/main/webapp/regform/
+src/main/webapp/registration_past.jsp

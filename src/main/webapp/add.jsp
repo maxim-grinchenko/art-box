@@ -20,6 +20,7 @@
 		<p class="${type} message_add">${message}</p>
 		
 			<form action="add" method="POST" class="form_add">
+			
 				<table>
 					<tr>
 						<td>Title : </td>

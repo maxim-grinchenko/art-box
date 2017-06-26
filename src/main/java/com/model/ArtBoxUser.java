@@ -1,15 +1,13 @@
 package com.model;
 
-public class User {
+public class ArtBoxUser {
 	
 	private long id;
 	private String email;
 	private String password;
 	
-	public User(String email, String password) {
+	public ArtBoxUser() {
 		super();
-		this.email = email;
-		this.password = password;
 	}
 
 	public long getId() {
@@ -17,7 +15,7 @@ public class User {
 	}
 
 	public void setId(long id) {
-		this.id = id;
+		this.id =id;
 	}
 
 	public String getEmail() {
