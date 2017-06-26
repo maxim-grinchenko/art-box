@@ -20,7 +20,7 @@ public class AddServlet extends HttpServlet {
 	private static final String ARTBOX_NAME = "name";
 	private static final String ARTBOX_AGE = "age";
 	private static final String ARTBOX_COST = "cost";
-	private static final String ADD_PAGE = "add.jsp";
+	private static final String REDIRECT_PAGE = "add.jsp";
 	private static final String MESSAGE_ATRIBUTE = "message";
 	private static final String TYPE = "type";
 	private static final String ERROR_MASSAGE_PARAMETER = "Error with parameters!";
@@ -46,7 +46,7 @@ public class AddServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.sendRedirect(ADD_PAGE);
+		response.sendRedirect(REDIRECT_PAGE);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -89,7 +89,7 @@ public class AddServlet extends HttpServlet {
 
 		request.setAttribute(MESSAGE_ATRIBUTE, message);
 		request.setAttribute(TYPE,typeAtribute);
-		request.getRequestDispatcher(ADD_PAGE).forward(request, response);
+		request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
 	}
 	
 	private boolean isValidedParameters(int age, double cost) {	

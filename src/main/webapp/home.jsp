@@ -16,7 +16,11 @@
 		</div>
 
 		<div class="discription">
-		<button id="myBtn">Open Modal</button>
+<!-- 		<button id="myBtn">Open Modal</button> -->
+
+		<div class="autorisation">
+			<%@include file="registration.jsp"%>
+		</div>
 			<p>Description ArtBox web-service:</p>
 			<p>The service is used for create, delete and search positions goods (further positions).</p>
 			<p>The page "<span class="uppercase">add</span>" is used to added positions.</p>

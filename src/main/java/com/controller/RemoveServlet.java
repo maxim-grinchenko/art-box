@@ -19,7 +19,7 @@ public class RemoveServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private static final String ARTBOX_ID = "id";
-	private static final String DASHBOARD_PAGE = "dashboard.jsp";
+	private static final String REDIRECT_PAGE = "dashboard.jsp";
 	private static final String MESSAGE_ATRIBUTE = "message";
 	private static final String TYPE = "type";
 	private static final String PRODUCTS = "products";
@@ -65,7 +65,7 @@ public class RemoveServlet extends HttpServlet {
 		
 		request.setAttribute(MESSAGE_ATRIBUTE, message);
 		request.setAttribute(TYPE,typeAtribute);
-		request.getRequestDispatcher(DASHBOARD_PAGE).forward(request, response);
+		request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

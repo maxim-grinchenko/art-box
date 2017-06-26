@@ -20,7 +20,7 @@ import com.model.ArtBox;
 public class SearchServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private static final String DASHBOARD_PAGE = "dashboard.jsp";
+	private static final String REDIRECT_PAGE = "dashboard.jsp";
 	private static final String ARTBOX_THEME = "name";
 	private static final String MESSAGE_ATRIBUTE = "message";
 	private static final String TYPE = "type";
@@ -73,12 +73,12 @@ public class SearchServlet extends HttpServlet {
 			message = ERROR_WRONG;
 			log.error(message, e);
 			
-			response.sendRedirect(DASHBOARD_PAGE);
+			response.sendRedirect(REDIRECT_PAGE);
 		}
 
 		request.setAttribute(MESSAGE_ATRIBUTE, message);
 		request.setAttribute(TYPE, typeAtribute);
-		request.getRequestDispatcher(DASHBOARD_PAGE).forward(request, response);
+		request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
