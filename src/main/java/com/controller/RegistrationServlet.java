@@ -24,7 +24,8 @@ public class RegistrationServlet extends HttpServlet {
 	private static final String MESSAGE_ATRIBUTE = "message_register";
 	private static final String SUCCESS_ATRIBUTE = "success_message_register";
 	private static final String TYPE = "type_register";
-	
+	private static final String TYPE_HIDDEN = "type_hidden";
+	private static final String HIDDEN_REGISTER = "hiden_mess_register";
 	
 	private static final Logger log = Logger.getLogger(RegistrationServlet.class);
 	
@@ -40,10 +41,7 @@ public class RegistrationServlet extends HttpServlet {
 		String password = request.getParameter(PASSWORD);
 		String email = request.getParameter(EMAIL);
 		
-		
-		log.debug("get param ..." 
-				+ " email : "		+ email 
-				+ "/ password : "	+ password);
+		log.debug("get param ... email : " + email + "/ password : " + password);
 		
 		UserStorage.addNewUser(new UserBuilder()
 									.setUserId()
@@ -53,9 +51,8 @@ public class RegistrationServlet extends HttpServlet {
 		
 		request.setAttribute(MESSAGE_ATRIBUTE, SUCCESS_MESSAGE);
 		request.setAttribute(TYPE, SUCCESS_ATRIBUTE);
-		request.setAttribute("type_hidden", "hiden_mess_register");
+		request.setAttribute(TYPE_HIDDEN, HIDDEN_REGISTER);
 		request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
-		
 	}
 
 }
