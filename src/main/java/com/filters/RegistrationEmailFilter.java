@@ -25,7 +25,6 @@ public class RegistrationEmailFilter implements Filter {
 	private static final String ERROR_TYPE = "error_message_reg";
 	private static final String TYPE_ATRIBUTE = "type_reg_email";
 	
-	
 	private static final Logger log = Logger.getLogger(RegistrationServlet.class);
 
     public RegistrationEmailFilter() {
