@@ -20,11 +20,11 @@ body {
 
 .general_container {
 	padding: 50px 0;
+	margin-bottom: 25px;
 }
 
 .menu {
-	width: 261px;
-    margin: auto;
+	text-align: center;
 }
 
 .section {
@@ -84,6 +84,7 @@ body {
 .block_message_register{
 	text-align: center;
 	outline: 1px solid #D32D27;
+	padding: 10px;
 }
 
 .copyright {

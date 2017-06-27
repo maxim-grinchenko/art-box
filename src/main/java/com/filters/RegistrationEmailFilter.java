@@ -42,7 +42,7 @@ public class RegistrationEmailFilter implements Filter {
 		final String EMAIL_REGEX = "^([\\w\\.\\-_]+)?\\w+@[\\w-_]+(\\.\\w+){1,}$";
 		
 		if (Pattern.matches(EMAIL_REGEX, email)) {
-			log.debug("Success! email is incorrect!");
+			log.debug("Success! email is correct!");
 			chain.doFilter(request, response);
 		} else {
 			log.debug("email is not valid!");
