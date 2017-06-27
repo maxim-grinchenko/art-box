@@ -24,7 +24,7 @@ public class RegistrationEmailFilter implements Filter {
 	private static final String MESSAGE_ATRIBUTE = "message_reg_email";
 	private static final String ERROR_TYPE = "error_message_reg";
 	private static final String TYPE_ATRIBUTE = "type_reg_email";
-	private static final String EMAIL_REGEX = "^([\\w\\.\\-_]+)?\\w+@[\\w-_]+(\\.\\w+){1,}$";
+	
 	
 	private static final Logger log = Logger.getLogger(RegistrationServlet.class);
 
@@ -39,6 +39,8 @@ public class RegistrationEmailFilter implements Filter {
 		String email = request.getParameter(EMAIL);
 		
 		log.debug("get param RegestrationEmailFilter... " + " email : " + email);
+		
+		final String EMAIL_REGEX = "^([\\w\\.\\-_]+)?\\w+@[\\w-_]+(\\.\\w+){1,}$";
 		
 		if (Pattern.matches(EMAIL_REGEX, email)) {
 			log.debug("Success! email is incorrect!");

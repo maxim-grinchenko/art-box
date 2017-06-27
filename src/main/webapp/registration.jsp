@@ -20,8 +20,8 @@
 							<label>Password</label> 
 							<input type="password" name="pass" value="" placeholder="input your password" /> 
 							<p class="${type_register_pass}">${message_reg_pass}</p>
-							<label>Confirm password</label> 
-							<input type="password" name="conf_pass" value="" placeholder="repeate your password" /> 
+							<label>Repeat password</label> 
+							<input type="password" name="conf_pass" value="" placeholder="repeat your password" /> 
 							<p class="${type_register_pass}">${message_reg_pass}</p>
 							<input type="submit" class="section" value="Registration" />
 					</form>

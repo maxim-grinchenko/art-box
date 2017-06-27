@@ -23,7 +23,6 @@ public class RegistrationPasswordFilter implements Filter {
 	private static final String MESSAGE_ATRIBUTE = "message_reg_pass";
 	private static final String ERROR_TYPE_ATRIBUTE = "error_message_reg";
 	private static final String TYPE_ATRIBUTE = "type_register_pass";
-	private static final String PASS_REGEX = "\\S{5,25}";
 	
 	private static final Logger log = Logger.getLogger(RegistrationPasswordFilter.class);
 
@@ -37,6 +36,8 @@ public class RegistrationPasswordFilter implements Filter {
 		
 		String password = request.getParameter(PASSWORD);
 		String confirm_password = request.getParameter(CONFIRM_PASSWORD);
+		
+		final String PASS_REGEX = "\\S{5,25}";
 		
 		if (password.equals(confirm_password) && Pattern.matches(PASS_REGEX, password)) {
 			log.debug("password is correct!");
