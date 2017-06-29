@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.dao.ArtBoxStorage;
 import com.model.ArtBox;
+import com.utils.Utils;
 
 @WebServlet("/add")
 public class AddServlet extends HttpServlet {
@@ -64,7 +65,7 @@ public class AddServlet extends HttpServlet {
 			
 			log.debug("get params... name - " + name + "; age - " + age + "; cost - " + cost);
 
-			if (isValidedParameters(age, cost)) {
+			if (Utils.isValidParameters(age, cost)) {
 				message = ERROR_MASSAGE + INVALID_MASSAGE;
 				log.warn(message);
 			} else {
@@ -89,9 +90,4 @@ public class AddServlet extends HttpServlet {
 		request.setAttribute(TYPE,messageType);
 		request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
 	}
-	
-	private boolean isValidedParameters(int age, double cost) {	
-		return cost > 0 && age > 0 ? false : true;
-	}
-	
 }

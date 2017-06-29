@@ -17,7 +17,7 @@
 		
 
 		<div class="discription">
-		<p class="${type_register}">${message_register}</p>
+		<p class="${type}">${message}</p>
 		<p class="block_message_register ${type_hidden}"><b>Before using this resource you need to login or register</b></p>
 		
 			<p>Description ArtBox web-service:</p>
