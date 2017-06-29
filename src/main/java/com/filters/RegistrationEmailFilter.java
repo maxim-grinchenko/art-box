@@ -1,7 +1,6 @@
 package com.filters;
 
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,6 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import org.apache.log4j.Logger;
 
 import com.controller.RegistrationServlet;
+import com.utils.Utils;
 
 @WebFilter("/registration")
 public class RegistrationEmailFilter implements Filter {
@@ -22,8 +22,8 @@ public class RegistrationEmailFilter implements Filter {
 	private static final String EMAIL = "email";
 	private static final String ERROR_MESSAGE = "Your email is incorrect!";
 	private static final String MESSAGE_ATRIBUTE = "message_reg_email";
-	private static final String ERROR_TYPE = "error_message_reg";
-	private static final String TYPE_ATRIBUTE = "type_reg_email";
+	private static final String RED = "error_message_reg";
+	private static final String TYPE = "type_reg_email";
 	
 	private static final Logger log = Logger.getLogger(RegistrationServlet.class);
 
@@ -37,17 +37,34 @@ public class RegistrationEmailFilter implements Filter {
 		
 		String email = request.getParameter(EMAIL);
 		
-		log.debug("get param RegestrationEmailFilter... " + " email : " + email);
+		String message = "";
 		
-		final String EMAIL_REGEX = "^([\\w\\.\\-_]+)?\\w+@[\\w-_]+(\\.\\w+){1,}$";
+		//TODO output of different messages for emailVerification() and checkForUniquenessOfEmail()
 		
-		if (Pattern.matches(EMAIL_REGEX, email)) {
-			log.debug("Success! email is correct!");
-			chain.doFilter(request, response);
+//		if(!Utils.emailVerification(email)){
+//			message = "email is incorect!";
+//			request.setAttribute(MESSAGE_ATRIBUTE, message);
+//			request.setAttribute(TYPE, RED);
+//			request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
+//		}
+//		if (!Utils.checkForUniquenessOfEmail(email)) {
+//			message = "this email address is already registered";
+//			request.setAttribute(MESSAGE_ATRIBUTE, message);
+//			request.setAttribute(TYPE, RED);
+//			request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
+//		} else {
+//			log.debug("Success! email is correct!");
+//			chain.doFilter(request, response);
+//		}
+		
+
+		if (Utils.emailVerification(email) && Utils.checkForUniquenessOfEmail(email)){
+				log.debug("Success! email is correct!");
+				chain.doFilter(request, response);
 		} else {
 			log.debug("email is not valid!");
-			request.setAttribute(MESSAGE_ATRIBUTE, ERROR_MESSAGE);
-			request.setAttribute(TYPE_ATRIBUTE, ERROR_TYPE);
+			request.setAttribute(MESSAGE_ATRIBUTE, message);
+			request.setAttribute(TYPE, RED);
 			request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
 		}
 	}

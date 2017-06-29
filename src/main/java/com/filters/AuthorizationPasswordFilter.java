@@ -14,20 +14,19 @@ import org.apache.log4j.Logger;
 
 import com.utils.Utils;
 
-@WebFilter("/registration")
-public class RegistrationPasswordFilter implements Filter {
+@WebFilter("/authorization")
+public class AuthorizationPasswordFilter implements Filter {
 	
-	private static final String REDIRECT_PAGE = "registration.jsp";
+	private static final String REDIRECT_PAGE = "authorization.jsp";
 	private static final String PASSWORD = "pass";
-	private static final String CONFIRM_PASSWORD = "conf_pass";
-	private static final String ERROR_MESSAGE = "Password is incorrect! Min 5, Max 25 signs! ";
+	private static final String ERROR_MESSAGE = "Password is incorrect!";
 	private static final String MESSAGE_ATRIBUTE = "message_reg_pass";
 	private static final String ERROR_TYPE_ATRIBUTE = "error_message_reg";
 	private static final String TYPE_ATRIBUTE = "type_register_pass";
 	
-	private static final Logger log = Logger.getLogger(RegistrationPasswordFilter.class);
+	private static final Logger log = Logger.getLogger(AuthorizationPasswordFilter.class);
 
-    public RegistrationPasswordFilter() {
+    public AuthorizationPasswordFilter() {
     }
 
 	public void destroy() {
@@ -36,9 +35,8 @@ public class RegistrationPasswordFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		String password = request.getParameter(PASSWORD);
-		String confirm_password = request.getParameter(CONFIRM_PASSWORD);
 		
-		if (password.equals(confirm_password) && Utils.passwordVerification(password)) {
+		if (Utils.passwordVerification(password)) {
 			log.debug("password is correct!");
 			chain.doFilter(request, response);
 		} else {

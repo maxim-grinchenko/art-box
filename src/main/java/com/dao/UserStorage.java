@@ -23,7 +23,10 @@ public class UserStorage {
 
 	public static void addNewUser(ArtBoxUser user) {
 		users.add(user);
-		log.info("New user added! : "+ user.toString());
+		log.info("New user added! : " + user.toString());
 	}
 	
+	public static List<ArtBoxUser> getAllUsers(){
+		return users;
+	}
 }

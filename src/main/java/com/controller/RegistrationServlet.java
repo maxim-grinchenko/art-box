@@ -17,16 +17,15 @@ import com.dao.UserStorage;
 public class RegistrationServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private static final String REDIRECT_PAGE = "home.jsp";
+	private static final String HOME_PAGE = "home.jsp";
 	private static final String EMAIL = "email";
 	private static final String PASSWORD = "pass";
-	private static final String SUCCESS_MESSAGE = "Congratulation! You registered is succesfuly!";
-	private static final String MESSAGE_ATRIBUTE = "message_register";
-	private static final String SUCCESS_ATRIBUTE = "success_message_register";
-	private static final String TYPE = "type_register";
+	private static final String SUCCESS_REG = "Congratulation! You registered is successfully!";
+	private static final String MESSAGE = "message";
+	private static final String GREEN = "green";
+	private static final String TYPE = "type";
 	private static final String TYPE_HIDDEN = "type_hidden";
 	private static final String HIDDEN_REGISTER = "hiden_mess_register";
-	
 	private static final Logger log = Logger.getLogger(RegistrationServlet.class);
 	
     public RegistrationServlet() {
@@ -34,7 +33,7 @@ public class RegistrationServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(REDIRECT_PAGE);
+		response.sendRedirect(HOME_PAGE);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,10 +48,10 @@ public class RegistrationServlet extends HttpServlet {
 									.setUserPassword(password)
 									.getUserBuild());
 		
-		request.setAttribute(MESSAGE_ATRIBUTE, SUCCESS_MESSAGE);
-		request.setAttribute(TYPE, SUCCESS_ATRIBUTE);
+		request.setAttribute("message", SUCCESS_REG);
+		request.setAttribute("type", GREEN);
 		request.setAttribute(TYPE_HIDDEN, HIDDEN_REGISTER);
-		request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
+		request.getRequestDispatcher(HOME_PAGE).forward(request, response);
 	}
 
 }
