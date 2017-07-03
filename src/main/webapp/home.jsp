@@ -14,10 +14,9 @@
 		<div class="menu">
 			<%@include file="menu.jsp"%>
 		</div>
-		
 
 		<div class="discription">
-		<p class="block_message_register ${type_hidden}"><b>Before using this resource you need to login or register</b></p>
+		<p class="block_message_register ${hidden}"><b>Before using this resource you need to login or register</b></p>
 		
 			<p>Description ArtBox web-service:</p>
 			<p>The service is used for create, delete and search positions goods (further positions).</p>

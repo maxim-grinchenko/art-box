@@ -22,7 +22,6 @@ public class DisplayServlet extends HttpServlet {
 	private static final String PRODUCTS = "products";
 	private static final String MESSAGE_ATRIBUTE = "message";
 	private static final String TYPE = "type";
-	//private static final String ERROR_MASSAGE = "Was not found according to search param...";
 	private static final String LIST_IS_EMPTY = "The list is empty!";
 	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
 	
@@ -40,23 +39,26 @@ public class DisplayServlet extends HttpServlet {
 	protected void doGet (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//if(request.getSession())
-		
-		ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
-		Map<Integer, ArtBox> collectionsArtBox = artboxStorage.getAll();
-		
-		String typeAtribute = ERROR_MESSAGE_ATRIBUTE;
-
-		if (collectionsArtBox.isEmpty() || collectionsArtBox == null) {
-			request.setAttribute(MESSAGE_ATRIBUTE, LIST_IS_EMPTY);
-			log.debug(LIST_IS_EMPTY);
+		if (request.getSession().getAttribute("user") == null) {
+			response.sendRedirect("home.jsp");
 		} else {
-			request.setAttribute(PRODUCTS, collectionsArtBox.entrySet());
-			log.debug("Display collections ArtBox...");
+
+			ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
+			Map<Integer, ArtBox> collectionsArtBox = artboxStorage.getAll();
+
+			String typeAtribute = ERROR_MESSAGE_ATRIBUTE;
+
+			if (collectionsArtBox.isEmpty() || collectionsArtBox == null) {
+				request.setAttribute(MESSAGE_ATRIBUTE, LIST_IS_EMPTY);
+				log.debug(LIST_IS_EMPTY);
+			} else {
+				request.setAttribute(PRODUCTS, collectionsArtBox.entrySet());
+				log.debug("Display collections ArtBox...");
+			}
+
+			request.setAttribute(TYPE, typeAtribute);
+			request.getRequestDispatcher(DASHBOARD_PAGE).forward(request, response);
 		}
-		
-		request.setAttribute(TYPE, typeAtribute);
-		request.getRequestDispatcher(DASHBOARD_PAGE).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
