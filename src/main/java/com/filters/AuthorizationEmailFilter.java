@@ -34,15 +34,20 @@ public class AuthorizationEmailFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
-		String email = request.getParameter(EMAIL);
-		
-		if (Utils.emailVerification(email)) {
-			log.debug("email is correct!");
-			chain.doFilter(request, response);
-		} else {
-			log.debug("email is INcorrect!");
-			request.setAttribute(MESSAGE_ATRIBUTE, ERROR_MESSAGE);
-			request.setAttribute(TYPE_ATRIBUTE, ERROR_TYPE);
+		try {
+			String email = request.getParameter(EMAIL);
+
+			if (Utils.emailVerification(email)) {
+				log.debug("email is correct!");
+				chain.doFilter(request, response);
+			} else {
+				log.debug("email is INcorrect!");
+				request.setAttribute(MESSAGE_ATRIBUTE, ERROR_MESSAGE);
+				request.setAttribute(TYPE_ATRIBUTE, ERROR_TYPE);
+				request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
+			}
+
+		} catch (NullPointerException e) {
 			request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
 		}
 	}

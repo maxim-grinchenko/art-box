@@ -14,6 +14,8 @@
 			  <div class="formholder">
 				<div class="randompad">
 					<form action="registration" method="POST" class="form_registration">
+							<label>Name</label> 
+							<input type="text" name="name" value="Petya" placeholder="Your name" />
 							<label>Email</label> 
 							<input type="email" name="email" value="qwe@qwe.qwe" placeholder="example@example.com" />
 							<p class="${type_reg_email}">${message_reg_email}</p>

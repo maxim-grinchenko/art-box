@@ -12,6 +12,11 @@ public class UserBuilder {
 	public UserBuilder() {
 		this.user = new ArtBoxUser();
 	}
+	
+	public UserBuilder setUserName(String name){
+		this.user.setName(name);
+		return this;
+	}
 
 	public UserBuilder setUserId() {
 		Integer id = null;

@@ -35,38 +35,25 @@ public class RegistrationEmailFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
-		String email = request.getParameter(EMAIL);
-		
-		String message = "";
-		
 		//TODO output of different messages for emailVerification() and checkForUniquenessOfEmail()
 		
-//		if(!Utils.emailVerification(email)){
-//			message = "email is incorect!";
-//			request.setAttribute(MESSAGE_ATRIBUTE, message);
-//			request.setAttribute(TYPE, RED);
-//			request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
-//		}
-//		if (!Utils.checkForUniquenessOfEmail(email)) {
-//			message = "this email address is already registered";
-//			request.setAttribute(MESSAGE_ATRIBUTE, message);
-//			request.setAttribute(TYPE, RED);
-//			request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
-//		} else {
-//			log.debug("Success! email is correct!");
-//			chain.doFilter(request, response);
-//		}
-		
+		try {
+			String email = request.getParameter(EMAIL);
 
-		if (Utils.emailVerification(email) && Utils.checkForUniquenessOfEmail(email)){
+			if (Utils.emailVerification(email) && Utils.checkForUniquenessOfEmail(email)) {
 				log.debug("Success! email is correct!");
 				chain.doFilter(request, response);
-		} else {
-			log.debug("email is not valid!");
-			request.setAttribute(MESSAGE_ATRIBUTE, message);
-			request.setAttribute(TYPE, RED);
+			} else {
+				log.debug("email is not valid!");
+				request.setAttribute(MESSAGE_ATRIBUTE, ERROR_MESSAGE);
+				request.setAttribute(TYPE, RED);
+				request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
+			}
+
+		} catch (NullPointerException e) {
 			request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
 		}
+		
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

@@ -17,7 +17,6 @@
 		
 
 		<div class="discription">
-		<p class="${type}">${message}</p>
 		<p class="block_message_register ${type_hidden}"><b>Before using this resource you need to login or register</b></p>
 		
 			<p>Description ArtBox web-service:</p>
@@ -47,7 +46,7 @@
 			</p>
 			<hr>
 			<p>If you want to purchase this web-service, you need to send your money by email: 
-				<a href="mailto:maxima@artbox.com?subject=Purchase ArtBox">maxima@artbox.com</a><br> 
+				<a href="mailto:maxima@artbox.com?subject=Purchase ArtBox" class="mail">maxima@artbox.com</a><br> 
 				<span class="note">*All money from the sale goes to charity </span></p>
 		</div>
 	</div>
