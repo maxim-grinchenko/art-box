@@ -21,7 +21,7 @@ public class AddServlet extends HttpServlet {
 	private static final String ARTBOX_NAME = "name";
 	private static final String ARTBOX_AGE = "age";
 	private static final String ARTBOX_COST = "cost";
-	private static final String REDIRECT_PAGE = "add.jsp";
+	private static final String ADD_PAGE = "add.jsp";
 	private static final String MESSAGE_ATRIBUTE = "message";
 	private static final String TYPE = "type";
 	private static final String ERROR_MASSAGE = "Error with parameters!";
@@ -30,7 +30,7 @@ public class AddServlet extends HttpServlet {
 	private static final String SUCCESS_MASSAGE_END = " was added.";
 	private static final String SUCCESS_ATRIBUTE = "success_message";
 	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
-	
+
 	private static final Logger log = Logger.getLogger(AddServlet.class);
 
 	public AddServlet() {
@@ -44,50 +44,61 @@ public class AddServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.sendRedirect(REDIRECT_PAGE);
+		if (request.getSession().getAttribute("user") == null) {
+			response.sendRedirect("home.jsp");
+		} else {
+			response.sendRedirect(ADD_PAGE);
+		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
 
-		String message;
-		String messageType = ERROR_MESSAGE_ATRIBUTE;
+//		if (request.getSession().getAttribute("user") == null) {
+//			request.getRequestDispatcher("home.jsp").forward(request, response);
+//		} else {
 
-		try {
-			
-			String name = request.getParameter(ARTBOX_NAME);
-			int age = Integer.parseInt(request.getParameter(ARTBOX_AGE));
-			double cost = Double.parseDouble((request.getParameter(ARTBOX_COST)).replaceAll(" ","").replace(',','.'));
-			
-			log.debug("get params... name - " + name + "; age - " + age + "; cost - " + cost);
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("text/html;charset=utf-8");
 
-			if (Utils.isValidParameters(age, cost)) {
-				message = ERROR_MASSAGE + INVALID_MASSAGE;
-				log.warn(message);
-			} else {
+			String message;
+			String messageType = ERROR_MESSAGE_ATRIBUTE;
 
-				ArtBox newArtBox = new ArtBox(name, age, cost);
+			try {
 
-				ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
-				artboxStorage.addedBase(newArtBox);
+				String name = request.getParameter(ARTBOX_NAME);
+				int age = Integer.parseInt(request.getParameter(ARTBOX_AGE));
+				double cost = Double
+						.parseDouble((request.getParameter(ARTBOX_COST)).replaceAll(" ", "").replace(',', '.'));
 
-				message = SUCCESS_MASSAGE_BEGIN + name + SUCCESS_MASSAGE_END;
-				messageType = SUCCESS_ATRIBUTE;
+				log.debug("get params... name - " + name + "; age - " + age + "; cost - " + cost);
 
-				log.debug(message);
+				if (Utils.isValidParameters(age, cost)) {
+					message = ERROR_MASSAGE + INVALID_MASSAGE;
+					log.warn(message);
+				} else {
+
+					ArtBox newArtBox = new ArtBox(name, age, cost);
+
+					ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
+					artboxStorage.addedBase(newArtBox);
+
+					message = SUCCESS_MASSAGE_BEGIN + name + SUCCESS_MASSAGE_END;
+					messageType = SUCCESS_ATRIBUTE;
+
+					log.debug(message);
+				}
+
+			} catch (NumberFormatException e) {
+				message = ERROR_MASSAGE;
+				log.error(message);
 			}
 
-		} catch (NumberFormatException e) {
-			message = ERROR_MASSAGE;
-			log.error(message);
-		}
+			request.setAttribute(MESSAGE_ATRIBUTE, message);
+			request.setAttribute(TYPE, messageType);
+			request.getRequestDispatcher(ADD_PAGE).forward(request, response);
 
-		request.setAttribute(MESSAGE_ATRIBUTE, message);
-		request.setAttribute(TYPE,messageType);
-		request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
+	//	}
 	}
 }
