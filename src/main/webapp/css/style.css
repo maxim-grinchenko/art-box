@@ -292,8 +292,9 @@ body {
 .register_page{
 	margin: auto;
     width: 350px;
-	outline: 1px solid #888;
-    padding: 20px
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #2C3E50;
 }
 
 #wrap {
@@ -345,7 +346,7 @@ fieldset {
   border-radius: 5px;
   padding-top: 5px;
 }
-.formholder input[type="email"], .formholder input[type="password"] {
+.formholder input[type="email"], .formholder input[type="password"], .formholder input[type="text"] {
   padding: 7px 5px;
   margin: 10px 0;
   width: 96%;
@@ -398,6 +399,10 @@ a:hover {
   color: #1abc9c;
 }
 
+.mail {
+	color: #444D56;
+}
+
 /* Add Animation */
 @-webkit-keyframes animatetop {
     from {top: -300px; opacity: 0}
@@ -419,7 +424,10 @@ a:hover {
 	text-align: center;
 }
 
-.hiden_mess_register{
+.hidden{
 	visibility: hidden;
 	position: absolute;
+	display: block;
+	outline: 1px solid #DF1410;
+	padding: 1px;
 }

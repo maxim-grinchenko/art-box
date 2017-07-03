@@ -25,7 +25,9 @@ public class Utils {
 
 	public static boolean checkForUniquenessOfEmail(String email) {
 		for (ArtBoxUser user : UserStorage.getAllUsers())
-			if (email.equals(user.getEmail())) return false;
+			if (email.equals(user.getEmail())) {
+				return false;
+			}
 		return true;
 	}
 

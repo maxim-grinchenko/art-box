@@ -4,9 +4,11 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -21,9 +23,9 @@ public class AuthorizationServlet extends HttpServlet {
 	private static final String AUTHORIZATION_PAGE = "authorization.jsp";
 	private static final String EMAIL = "email";
 	private static final String PASSWORD = "pass";
-	private static final String HIDDEN_REGISTER = "hiden_mess_register";
+	private static final String HIDDEN = "hidden";
 	private static final String SUCCCESS_AUTH = "SUCCESS AUTHORIZATION!";
-	private static final String ERROR_AUTH = "ERROR AUTHORIZATION! User not found!";
+	private static final String ERROR_AUTH = "User not found!";
 	private static final String GREEN = "green";
 	private static final String RED = "red";
 	private static final Logger log = Logger.getLogger(AuthorizationServlet.class);
@@ -48,11 +50,25 @@ public class AuthorizationServlet extends HttpServlet {
 		log.debug("get param ... email : " + email + "/ password : " + password);
 
 		boolean successAuthorization = false;
-
+		
 		for (ArtBoxUser user : UserStorage.getAllUsers()) {
 			if (email.equals(user.getEmail()) && password.equals(user.getPassword())) {
 				log.debug("user success authorization!");
 				successAuthorization = true;
+				
+				Cookie cookie = new Cookie("ArtBoxCookie", email);
+				response.addCookie(cookie);
+				log.debug("add cookie : " + cookie);
+				
+				HttpSession session = request.getSession();
+				session.setMaxInactiveInterval(10);
+				session.setAttribute("user", "Hello "+user.getName() + " | ");
+				session.setAttribute("hidden", "hidden");
+				session.setAttribute("logout", "logout");
+				request.setAttribute("user", "Hello "+user.getName() + " | ");
+				request.setAttribute("logout", "logout");
+				log.debug(session.getId());
+				break;
 			}
 		}
 
@@ -60,7 +76,7 @@ public class AuthorizationServlet extends HttpServlet {
 			log.debug("SUCCESS AUTHORIZATION!");
 			request.setAttribute("message", SUCCCESS_AUTH);
 			request.setAttribute("type", GREEN);
-			request.setAttribute("type_hidden", HIDDEN_REGISTER);
+			request.setAttribute("hidden", HIDDEN);
 			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
 		} else {
 			log.debug("ERROR AUTHORIZATION!");

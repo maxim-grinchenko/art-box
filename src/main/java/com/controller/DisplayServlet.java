@@ -40,6 +40,8 @@ public class DisplayServlet extends HttpServlet {
 	protected void doGet (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		//if(request.getSession())
+		
 		ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
 		Map<Integer, ArtBox> collectionsArtBox = artboxStorage.getAll();
 		

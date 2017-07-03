@@ -3,6 +3,7 @@ package com.model;
 public class ArtBoxUser {
 	
 	private long id;
+	private String name;
 	private String email;
 	private String password;
 	
@@ -16,6 +17,14 @@ public class ArtBoxUser {
 
 	public void setId(long id) {
 		this.id =id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -36,7 +45,6 @@ public class ArtBoxUser {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + "]";
+		return "ArtBoxUser [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + "]";
 	}
-
 }
