@@ -82,13 +82,13 @@ public class ArtBoxStorage {
 		return artBoxs;
 	}
 
-	public List<ArtBox> findArtBoxByName(String ArtBoxName) {
+	public List<ArtBox> findArtBoxByName(String artBoxName) {
 
 		ConnectionFactoryBuilder connectionFactoryBuilder = new ConnectionFactoryBuilder();
 		List<ArtBox> artBoxs = new ArrayList<ArtBox>();
 		try (Connection connection = connectionFactoryBuilder.getConnection()) {
 			PreparedStatement ps = connection.prepareStatement(SQL_SEARCH_ARTBOX);
-			ps.setString(1, ArtBoxName);
+			ps.setString(1, artBoxName);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");

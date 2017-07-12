@@ -14,3 +14,4 @@ src/main/webapp/regform/
 src/main/webapp/registration_past.jsp
 /.settings/
 /src/main/java/com/utils/Main.java
+/src/main/java/com/filters/Main.java
