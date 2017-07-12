@@ -2,6 +2,7 @@ package com.model;
 
 public class ArtBox {
 	
+	private int id;
 	private String name;
 	private int age;
 	private double cost;
@@ -10,6 +11,23 @@ public class ArtBox {
 		this.name = name;
 		this.age = age;
 		this.cost = cost;
+	}
+	
+	public ArtBox (int id, String name, int age, double cost){
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.cost = cost;
+	}
+	
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -32,7 +50,7 @@ public class ArtBox {
 		return cost;
 	}
 
-	public void setCost(int cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
 	}
 

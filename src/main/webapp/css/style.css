@@ -81,13 +81,13 @@ body {
 	font-style: italic;
 }
 
-.block_message_register{
+.block_before_register{
 	text-align: center;
 	outline: 1px solid #D32D27;
 	padding: 10px;
 }
 
-.block_center{
+.block_message_register{
 	text-align:center;
 	outline: 1px solid #1abc9c;
 	padding: 10px;

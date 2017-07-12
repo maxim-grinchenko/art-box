@@ -1,8 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +31,7 @@ public class SearchServlet extends HttpServlet {
 	private static final String SUCCESS_FOUND = "List of found : ";	
 	private static final String SUCCESS_MASSAGE_ATRIBUTE = "success_message";
 	
-	private static final Logger log = Logger.getLogger(RemoveServlet.class);
+	private static final Logger log = Logger.getLogger(SearchServlet.class);
        
     public SearchServlet() {
         super();
@@ -48,8 +47,8 @@ public class SearchServlet extends HttpServlet {
 			log.debug("get search parameter : " + name);
 			
 			ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
-			Set<Map.Entry<Integer, ArtBox>> findArtBoxCollections = artboxStorage.findArtBoxByName(name);
-			
+			List<ArtBox> findArtBoxCollections = artboxStorage.findArtBoxByName(name);
+			log.debug("*******************"+findArtBoxCollections);
 			boolean notFound = true;
 
 			if (findArtBoxCollections != null) {

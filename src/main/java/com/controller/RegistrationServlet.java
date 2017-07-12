@@ -23,11 +23,7 @@ public class RegistrationServlet extends HttpServlet {
 	private static final String EMAIL = "email";
 	private static final String PASSWORD = "pass";
 	private static final String SUCCESS_REG = "Congratulation! You registered is successfully!";
-	private static final String MESSAGE = "message";
 	private static final String GREEN = "green";
-	private static final String TYPE = "type";
-	private static final String TYPE_HIDDEN = "type_hidden";
-	private static final String HIDDEN_REGISTER = "hiden_mess_register";
 	private static final Logger log = Logger.getLogger(RegistrationServlet.class);
 	
     public RegistrationServlet() {

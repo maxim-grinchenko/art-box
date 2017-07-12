@@ -1,7 +1,7 @@
-package com.controller;
+ package com.controller;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,15 +44,15 @@ public class DisplayServlet extends HttpServlet {
 		} else {
 
 			ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
-			Map<Integer, ArtBox> collectionsArtBox = artboxStorage.getAll();
-
+			List<ArtBox> collectionsArtBox = artboxStorage.getList();
+System.out.println(collectionsArtBox);
 			String typeAtribute = ERROR_MESSAGE_ATRIBUTE;
 
 			if (collectionsArtBox.isEmpty() || collectionsArtBox == null) {
 				request.setAttribute(MESSAGE_ATRIBUTE, LIST_IS_EMPTY);
 				log.debug(LIST_IS_EMPTY);
 			} else {
-				request.setAttribute(PRODUCTS, collectionsArtBox.entrySet());
+				request.setAttribute(PRODUCTS, collectionsArtBox);
 				log.debug("Display collections ArtBox...");
 			}
 

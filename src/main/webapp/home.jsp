@@ -16,7 +16,8 @@
 		</div>
 
 		<div class="discription">
-		<p class="block_message_register ${hidden}"><b>Before using this resource you need to login or register</b></p>
+		<p class="block_before_register ${hidden}"><b>Before using this resource you need to login or register</b></p>
+		<p class="${block_message_register} ${green}"><b>${success_message_register}</b></p>
 		
 			<p>Description ArtBox web-service:</p>
 			<p>The service is used for create, delete and search positions goods (further positions).</p>

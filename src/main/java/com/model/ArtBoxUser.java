@@ -1,7 +1,8 @@
 package com.model;
 
+//@Entity
+//@Table(name = "users")
 public class ArtBoxUser {
-	
 	private long id;
 	private String name;
 	private String email;
@@ -9,6 +10,13 @@ public class ArtBoxUser {
 	
 	public ArtBoxUser() {
 		super();
+	}
+	
+	public ArtBoxUser(String name, String email, String password) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
 	}
 
 	public long getId() {
