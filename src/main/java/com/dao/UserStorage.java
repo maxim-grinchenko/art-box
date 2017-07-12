@@ -21,6 +21,7 @@ public class UserStorage {
 	
 	private final static String SQL_INSERT_USERS = "INSERT INTO users(NAME, EMAIL, PASSWORD) VALUES (?,?,?);";
 	private final static String SQL_SELECT_USERS = "SELECT * FROM users;";
+	private final static String SQL_FIND_USER = "SELECT * FROM users WHERE email = ?;";
 	
 	public UserStorage(){
 	}
@@ -65,8 +66,28 @@ public class UserStorage {
 	        return users;
 	}
 	
-	public static List<ArtBoxUser> getAllUsers(){
-		return users;
+	public static List<ArtBoxUser> searchUserByEmail(String searchEmail){
+		
+		ConnectionFactoryBuilder connectionFactoryBuilder = new ConnectionFactoryBuilder();
+		 List<ArtBoxUser> users = new ArrayList<ArtBoxUser>();
+		 
+		 try (Connection connection = connectionFactoryBuilder.getConnection()) {
+	            PreparedStatement ps = connection.prepareStatement(SQL_FIND_USER);
+	            ps.setString(1, searchEmail);
+	            ps.execute();
+	            ResultSet rs = ps.executeQuery();
+	          
+	            while (rs.next()) {
+	                String email = rs.getString("EMAIL");
+	                String password = rs.getString("PASSWORD");
+	                log.debug("find user with email : " + email);
+	                users.add(new ArtBoxUser(email, password));
+	            }
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+			}
+	        
+	        return users;
 	}
 	
 	
