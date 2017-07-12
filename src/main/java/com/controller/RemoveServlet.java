@@ -1,7 +1,6 @@
 package com.controller;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.dao.ArtBoxStorage;
-import com.model.ArtBox;
 
 @WebServlet("/remove")
 public class RemoveServlet extends HttpServlet {
@@ -47,9 +45,9 @@ public class RemoveServlet extends HttpServlet {
 			log.debug("Get parameter to delete: " + id);
 			
 			ArtBoxStorage storage = ArtBoxStorage.getInstance();
-			Map<Integer, ArtBox> unitBox = storage.removedBase(id);
+			storage.removedBase(id);
 			
-			request.setAttribute(PRODUCTS, unitBox.entrySet());
+			request.setAttribute(PRODUCTS, storage.getList());
 			
 			message = SUCCESS_REMOVED_BEFORE + id + SUCCESS_REMOVED_AFTER;
 			typeAtribute = SUCCESS_MASSAGE_ATRIBUTE;

@@ -18,7 +18,7 @@
 		</div>
 
 			<form action="find"  method="get" class="form_search">
-				<input type="text" name="name" value="" placeholder="Search field"> 
+				<input type="text" name="name" value="" placeholder="Search field by name..."> 
 				<input type="submit" value="Search" class="pointer">
 			</form>
 			
@@ -34,13 +34,13 @@
 				</tr>
 				<c:forEach items="${products}" var="product">
 				<tr>
-					<td>${product.key}</td>
-					<td class="table_name">${product.getValue().name}</td>
-					<td>${product.getValue().age}</td>
-					<td>${product.getValue().cost}</td>
+					<td>${product.getId()}</td>
+					<td class="table_name">${product.getName()}</td>
+					<td>${product.getAge()}</td>
+					<td>${product.getCost()}</td>
 					<td>
 						<form action="remove" method="GET">
-							<input type="hidden" name="id" value="${product.key}"> 
+							<input type="hidden" name="id" value="${product.getId()}"> 
 							<input type="submit" value="delete" class="btn_delete">
 						</form>
 					</td>

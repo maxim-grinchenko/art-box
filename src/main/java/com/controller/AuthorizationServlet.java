@@ -25,6 +25,7 @@ public class AuthorizationServlet extends HttpServlet {
 	private static final String PASSWORD = "pass";
 	private static final String HIDDEN = "hidden";
 	private static final String SUCCCESS_AUTH = "SUCCESS AUTHORIZATION!";
+	private static final String BLOCK_MESSAGE_REGISTER = "block_message_register";
 	private static final String ERROR_AUTH = "User not found!";
 	private static final String GREEN = "green";
 	private static final String RED = "red";
@@ -51,7 +52,7 @@ public class AuthorizationServlet extends HttpServlet {
 
 		boolean successAuthorization = false;
 		
-		for (ArtBoxUser user : UserStorage.getAllUsers()) {
+		for (ArtBoxUser user : UserStorage.findUser()) {
 			if (email.equals(user.getEmail()) && password.equals(user.getPassword())) {
 				log.debug("user success authorization!");
 				successAuthorization = true;
@@ -61,11 +62,11 @@ public class AuthorizationServlet extends HttpServlet {
 				log.debug("add cookie : " + cookie);
 				
 				HttpSession session = request.getSession();
-				session.setMaxInactiveInterval(10);
+				session.setMaxInactiveInterval(3600*3600);
 				session.setAttribute("user", "Hello "+user.getName() + " | ");
 				session.setAttribute("hidden", "hidden");
 				session.setAttribute("logout", "logout");
-				request.setAttribute("user", "Hello "+user.getName() + " | ");
+				request.setAttribute("user", "Hello " + user.getName() + " | ");
 				request.setAttribute("logout", "logout");
 				log.debug(session.getId());
 				break;
@@ -74,8 +75,9 @@ public class AuthorizationServlet extends HttpServlet {
 
 		if (successAuthorization) {
 			log.debug("SUCCESS AUTHORIZATION!");
-			request.setAttribute("message", SUCCCESS_AUTH);
-			request.setAttribute("type", GREEN);
+			request.setAttribute("success_message_register", SUCCCESS_AUTH);
+			request.setAttribute("block_message_register", BLOCK_MESSAGE_REGISTER);
+			request.setAttribute("green", GREEN);
 			request.setAttribute("hidden", HIDDEN);
 			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
 		} else {

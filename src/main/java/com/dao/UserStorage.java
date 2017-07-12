@@ -1,10 +1,16 @@
 package com.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.dbconfig.ConnectionFactoryBuilder;
 import com.model.ArtBoxUser;
 
 public class UserStorage {
@@ -12,6 +18,9 @@ public class UserStorage {
 	private static List<ArtBoxUser> users = new ArrayList<ArtBoxUser>();
 	private static UserStorage instance;
 	private static final Logger log = Logger.getLogger(UserStorage.class);
+	
+	private final static String SQL_INSERT_USERS = "INSERT INTO users(NAME, EMAIL, PASSWORD) VALUES (?,?,?);";
+	private final static String SQL_SELECT_USERS = "SELECT * FROM users;";
 	
 	public UserStorage(){
 	}
@@ -22,11 +31,44 @@ public class UserStorage {
 	}
 
 	public static void addNewUser(ArtBoxUser user) {
-		users.add(user);
-		log.info("New user added! : " + user.toString());
+		
+        ConnectionFactoryBuilder connectionFactoryBuilder = new ConnectionFactoryBuilder();
+        try (Connection connection = connectionFactoryBuilder.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SQL_INSERT_USERS, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.execute();
+            log.debug("new user added in DB!");
+        } catch (SQLException e) {
+            log.error(e.getMessage(), e);
+        }
+	}
+	
+	public static List<ArtBoxUser> findUser(){
+		
+		 ConnectionFactoryBuilder connectionFactoryBuilder = new ConnectionFactoryBuilder();
+		 List<ArtBoxUser> users = new ArrayList<ArtBoxUser>();
+		 try (Connection connection = connectionFactoryBuilder.getConnection()) {
+	            PreparedStatement ps = connection.prepareStatement(SQL_SELECT_USERS);
+	            ResultSet rs = ps.executeQuery();
+	            while (rs.next()) {
+	                String name = rs.getString("NAME");
+	                String email = rs.getString("EMAIL");
+	                String password = rs.getString("PASSWORD");
+	                users.add(new ArtBoxUser(name, email, password));
+	            }
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+			}
+	        log.debug("find all users in DataBase USERS....");
+	        return users;
 	}
 	
 	public static List<ArtBoxUser> getAllUsers(){
 		return users;
 	}
+	
+	
+
 }

@@ -26,7 +26,7 @@ public class AddServlet extends HttpServlet {
 	private static final String TYPE = "type";
 	private static final String ERROR_MASSAGE = "Error with parameters!";
 	private static final String INVALID_MASSAGE = " It can't be negative!";
-	private static final String SUCCESS_MASSAGE_BEGIN = "Success! Pruduct ";
+	private static final String SUCCESS_MASSAGE_BEGIN = "Success! Product ";
 	private static final String SUCCESS_MASSAGE_END = " was added.";
 	private static final String SUCCESS_ATRIBUTE = "success_message";
 	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
@@ -49,56 +49,49 @@ public class AddServlet extends HttpServlet {
 		} else {
 			response.sendRedirect(ADD_PAGE);
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-//		if (request.getSession().getAttribute("user") == null) {
-//			request.getRequestDispatcher("home.jsp").forward(request, response);
-//		} else {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
 
-			request.setCharacterEncoding("utf-8");
-			response.setContentType("text/html;charset=utf-8");
+		String message;
+		String messageType = ERROR_MESSAGE_ATRIBUTE;
 
-			String message;
-			String messageType = ERROR_MESSAGE_ATRIBUTE;
+		try {
 
-			try {
+			String name = request.getParameter(ARTBOX_NAME);
+			int age = Integer.parseInt(request.getParameter(ARTBOX_AGE));
+			double cost = Double.parseDouble((request.getParameter(ARTBOX_COST)).replaceAll(" ", "").replace(',', '.'));
 
-				String name = request.getParameter(ARTBOX_NAME);
-				int age = Integer.parseInt(request.getParameter(ARTBOX_AGE));
-				double cost = Double
-						.parseDouble((request.getParameter(ARTBOX_COST)).replaceAll(" ", "").replace(',', '.'));
+			log.debug("get params... name - " + name + "; age - " + age + "; cost - " + cost);
 
-				log.debug("get params... name - " + name + "; age - " + age + "; cost - " + cost);
+			if (Utils.isValidParameters(age, cost)) {
+				message = ERROR_MASSAGE + INVALID_MASSAGE;
+				log.warn(message);
+			} else {
 
-				if (Utils.isValidParameters(age, cost)) {
-					message = ERROR_MASSAGE + INVALID_MASSAGE;
-					log.warn(message);
-				} else {
+				ArtBox newArtBox = new ArtBox(name, age, cost);
 
-					ArtBox newArtBox = new ArtBox(name, age, cost);
+				ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
+				artboxStorage.addedBase(newArtBox);
 
-					ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
-					artboxStorage.addedBase(newArtBox);
+				message = SUCCESS_MASSAGE_BEGIN + name + SUCCESS_MASSAGE_END;
+				messageType = SUCCESS_ATRIBUTE;
 
-					message = SUCCESS_MASSAGE_BEGIN + name + SUCCESS_MASSAGE_END;
-					messageType = SUCCESS_ATRIBUTE;
-
-					log.debug(message);
-				}
-
-			} catch (NumberFormatException e) {
-				message = ERROR_MASSAGE;
-				log.error(message);
+				log.debug(message);
 			}
 
-			request.setAttribute(MESSAGE_ATRIBUTE, message);
-			request.setAttribute(TYPE, messageType);
-			request.getRequestDispatcher(ADD_PAGE).forward(request, response);
+		} catch (NumberFormatException e) {
+			message = ERROR_MASSAGE;
+			log.error(message);
+		}
 
-	//	}
+		request.setAttribute(MESSAGE_ATRIBUTE, message);
+		request.setAttribute(TYPE, messageType);
+		request.getRequestDispatcher(ADD_PAGE).forward(request, response);
+
 	}
 }
