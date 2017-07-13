@@ -15,3 +15,5 @@ src/main/webapp/registration_past.jsp
 /.settings/
 /src/main/java/com/utils/Main.java
 /src/main/java/com/filters/Main.java
+/src/main/java/com/dbconfig/Main.java
+/src/main/java/com/manager/MainManager.java

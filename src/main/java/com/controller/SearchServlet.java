@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.dao.ArtBoxStorage;
+import com.manager.ConfigKey;
+import com.manager.PropertiesLoader;
 import com.model.ArtBox;
 
 
@@ -19,17 +21,7 @@ import com.model.ArtBox;
 public class SearchServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private static final String REDIRECT_PAGE = "dashboard.jsp";
-	private static final String ARTBOX_THEME = "name";
-	private static final String MESSAGE_ATRIBUTE = "message";
-	private static final String TYPE = "type";
 	private static final String PRODUCTS = "products";
-	private static final String ERROR_NO_DB_BEGIN = "ERROR! Product ";
-	private static final String ERROR_NO_DB_AFTER = " not found in DB!";
-	private static final String ERROR_WRONG = "Somesing is wrong";	
-	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
-	private static final String SUCCESS_FOUND = "List of found : ";	
-	private static final String SUCCESS_MASSAGE_ATRIBUTE = "success_message";
 	
 	private static final Logger log = Logger.getLogger(SearchServlet.class);
        
@@ -40,15 +32,17 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String message = null;
-		String typeAtribute = ERROR_MESSAGE_ATRIBUTE;
+		String typeAtribute = PropertiesLoader.getProperty(ConfigKey.RED.name());
 
 		try {
-			String name = request.getParameter(ARTBOX_THEME);
+			
+			final String ARTBOX_NAME = "name";
+			
+			String name = request.getParameter(ARTBOX_NAME);
 			log.debug("get search parameter : " + name);
 			
 			ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
 			List<ArtBox> findArtBoxCollections = artboxStorage.findArtBoxByName(name);
-			log.debug("*******************"+findArtBoxCollections);
 			boolean notFound = true;
 
 			if (findArtBoxCollections != null) {
@@ -56,28 +50,32 @@ public class SearchServlet extends HttpServlet {
 				
 				request.setAttribute(PRODUCTS, findArtBoxCollections);
 
-				message = SUCCESS_FOUND + name;
-				typeAtribute = SUCCESS_MASSAGE_ATRIBUTE;
+				message = PropertiesLoader.getProperty(ConfigKey.SUCCESS_FOUND.name()) + name;
+				typeAtribute = PropertiesLoader.getProperty(ConfigKey.GREEN.name());
 				
 				notFound = false;
 			}
 
 			if (notFound){
-				message = ERROR_NO_DB_BEGIN + name + ERROR_NO_DB_AFTER;
+				
+				final String _ERROR_NO_DB_BEGIN = PropertiesLoader.getProperty(ConfigKey.ERROR_NO_DB_BEGIN.name());
+				final String _ERROR_NO_DB_AFTER = PropertiesLoader.getProperty(ConfigKey.ERROR_NO_DB_AFTER.name());
+				
+				message = _ERROR_NO_DB_BEGIN + name + _ERROR_NO_DB_AFTER;
 			}
 				
 			log.debug("Displaying of found parameters...");
 
 		} catch (NullPointerException e) {
-			message = ERROR_WRONG;
+			message = PropertiesLoader.getProperty(ConfigKey.ERROR_WRONG.name());
 			log.error(message, e);
 			
-			response.sendRedirect(REDIRECT_PAGE);
+			response.sendRedirect(PropertiesLoader.getProperty(ConfigKey.DASHBOARD_PAGE.name()));
 		}
 
-		request.setAttribute(MESSAGE_ATRIBUTE, message);
-		request.setAttribute(TYPE, typeAtribute);
-		request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
+		request.setAttribute("message", message);
+		request.setAttribute("type", typeAtribute);
+		request.getRequestDispatcher(PropertiesLoader.getProperty(ConfigKey.DASHBOARD_PAGE.name())).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

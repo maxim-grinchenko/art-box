@@ -12,17 +12,14 @@ import javax.servlet.annotation.WebFilter;
 
 import org.apache.log4j.Logger;
 
+import com.manager.ConfigKey;
+import com.manager.PropertiesLoader;
 import com.utils.Utils;
 
 @WebFilter("/authorization")
 public class AuthorizationEmailFilter implements Filter {
 	
-	private static final String REDIRECT_PAGE = "authorization.jsp";
-	private static final String EMAIL = "email";
-	private static final String ERROR_MESSAGE = "Your email is incorrect!";
-	private static final String MESSAGE_ATRIBUTE = "message_reg_email";
 	private static final String ERROR_TYPE = "error_message_reg";
-	private static final String TYPE_ATRIBUTE = "type_reg_email";
 	
 	private static final Logger log = Logger.getLogger(AuthorizationEmailFilter.class);
 
@@ -35,6 +32,7 @@ public class AuthorizationEmailFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		try {
+			final String EMAIL = "email";
 			String email = request.getParameter(EMAIL);
 
 			if (Utils.emailVerification(email)) {
@@ -42,13 +40,13 @@ public class AuthorizationEmailFilter implements Filter {
 				chain.doFilter(request, response);
 			} else {
 				log.debug("email is INcorrect!");
-				request.setAttribute(MESSAGE_ATRIBUTE, ERROR_MESSAGE);
-				request.setAttribute(TYPE_ATRIBUTE, ERROR_TYPE);
-				request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
+				request.setAttribute("message_reg_email", PropertiesLoader.getProperty(ConfigKey.EMAIL_INCORRECT.name()));
+				request.setAttribute("type_reg_email", ERROR_TYPE);
+				request.getRequestDispatcher(PropertiesLoader.getProperty(ConfigKey.AUTHORIZATION_PAGE.name())).forward(request, response);
 			}
 
 		} catch (NullPointerException e) {
-			request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
+			request.getRequestDispatcher(PropertiesLoader.getProperty(ConfigKey.AUTHORIZATION_PAGE.name())).forward(request, response);
 		}
 	}
 

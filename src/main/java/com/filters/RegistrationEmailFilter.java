@@ -13,17 +13,12 @@ import javax.servlet.annotation.WebFilter;
 import org.apache.log4j.Logger;
 
 import com.controller.RegistrationServlet;
+import com.manager.ConfigKey;
+import com.manager.PropertiesLoader;
 import com.utils.Utils;
 
 @WebFilter("/registration")
 public class RegistrationEmailFilter implements Filter {
-	
-	private static final String REDIRECT_PAGE = "registration.jsp";
-	private static final String EMAIL = "email";
-	private static final String ERROR_MESSAGE = "Your email is incorrect!";
-	private static final String MESSAGE_ATRIBUTE = "message_reg_email";
-	private static final String RED = "error_message_reg";
-	private static final String TYPE = "type_reg_email";
 	
 	private static final Logger log = Logger.getLogger(RegistrationServlet.class);
 
@@ -37,7 +32,11 @@ public class RegistrationEmailFilter implements Filter {
 		
 		//TODO output of different messages for emailVerification() and checkForUniquenessOfEmail()
 		
+		final String _REGISTRATION_PAGE = PropertiesLoader.getProperty(ConfigKey.REGISTRATION_PAGE.name());
+		
 		try {
+			
+			final String EMAIL = "email";
 			String email = request.getParameter(EMAIL);
 
 			if (Utils.emailVerification(email) && Utils.checkForUniquenessOfEmail(email)) {
@@ -45,13 +44,13 @@ public class RegistrationEmailFilter implements Filter {
 				chain.doFilter(request, response);
 			} else {
 				log.debug("email is not valid!");
-				request.setAttribute(MESSAGE_ATRIBUTE, ERROR_MESSAGE);
-				request.setAttribute(TYPE, RED);
-				request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
+				request.setAttribute("message_reg_email", PropertiesLoader.getProperty(ConfigKey.EMAIL_INCORRECT.name()));
+				request.setAttribute("type_reg_email", PropertiesLoader.getProperty(ConfigKey.RED.name()));
+				request.getRequestDispatcher(_REGISTRATION_PAGE).forward(request, response);
 			}
 
 		} catch (NullPointerException e) {
-			request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
+			request.getRequestDispatcher(_REGISTRATION_PAGE).forward(request, response);
 		}
 		
 	}

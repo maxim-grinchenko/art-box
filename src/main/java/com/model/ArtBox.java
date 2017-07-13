@@ -14,14 +14,10 @@ public class ArtBox {
 	}
 	
 	public ArtBox (int id, String name, int age, double cost){
+		this(name, age, cost);
 		this.id = id;
-		this.name = name;
-		this.age = age;
-		this.cost = cost;
 	}
 	
-	
-
 	public int getId() {
 		return id;
 	}

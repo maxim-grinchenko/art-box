@@ -11,11 +11,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.manager.ConfigKey;
+import com.manager.PropertiesLoader;
+
 @WebServlet("/logout")
 public class LogOutServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private static final String HOME_PAGE = "home.jsp";
 	private static final Logger log = Logger.getLogger(AuthorizationServlet.class);
        
     public LogOutServlet() {
@@ -26,7 +28,7 @@ public class LogOutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		log.debug("Delete session");
-		request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+		request.getRequestDispatcher(PropertiesLoader.getProperty(ConfigKey.HOME_PAGE.name())).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -13,38 +13,33 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.dao.UserStorage;
+import com.manager.ConfigKey;
+import com.manager.PropertiesLoader;
 import com.model.ArtBoxUser;
 
 @WebServlet("/authorization")
 public class AuthorizationServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final String HOME_PAGE = "home.jsp";
-	private static final String AUTHORIZATION_PAGE = "authorization.jsp";
-	private static final String EMAIL = "email";
-	private static final String PASSWORD = "pass";
 	private static final String HIDDEN = "hidden";
-	private static final String SUCCCESS_AUTH = "SUCCESS AUTHORIZATION!";
 	private static final String BLOCK_MESSAGE_REGISTER = "block_message_register";
-	private static final String ERROR_AUTH = "User not found!";
-	private static final String GREEN = "green";
-	private static final String RED = "red";
 	private static final Logger log = Logger.getLogger(AuthorizationServlet.class);
 	
-	//private final PropertiesLoader propertiesLoader = new PropertiesLoaderImpl();
-
 	public AuthorizationServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendRedirect(HOME_PAGE);
+		response.sendRedirect(PropertiesLoader.getProperty(ConfigKey.HOME_PAGE.name()));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		final String EMAIL = "email";
+		final String PASSWORD = "pass";
+		
 		String email = request.getParameter(EMAIL);
 		String password = request.getParameter(PASSWORD);
 
@@ -74,17 +69,20 @@ public class AuthorizationServlet extends HttpServlet {
 		}
 
 		if (successAuthorization) {
-			log.debug("SUCCESS AUTHORIZATION!");
-			request.setAttribute("success_message_register", SUCCCESS_AUTH);
+			
+			final String _SUCCCESS_AUTH = PropertiesLoader.getProperty(ConfigKey.SUCCCESS_AUTH.name());
+			
+			log.debug(_SUCCCESS_AUTH);
+			request.setAttribute("success_message_register", _SUCCCESS_AUTH);
 			request.setAttribute("block_message_register", BLOCK_MESSAGE_REGISTER);
-			request.setAttribute("green", GREEN);
+			request.setAttribute("green", PropertiesLoader.getProperty(ConfigKey.GREEN.name()));
 			request.setAttribute("hidden", HIDDEN);
-			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+			request.getRequestDispatcher(PropertiesLoader.getProperty(ConfigKey.HOME_PAGE.name())).forward(request, response);
 		} else {
 			log.debug("ERROR AUTHORIZATION!");
-			request.setAttribute("message", ERROR_AUTH);
-			request.setAttribute("type", RED);
-			request.getRequestDispatcher(AUTHORIZATION_PAGE).forward(request, response);
+			request.setAttribute("message", PropertiesLoader.getProperty(ConfigKey.ERROR_AUTH.name()));
+			request.setAttribute("type", PropertiesLoader.getProperty(ConfigKey.RED.name()));
+			request.getRequestDispatcher(PropertiesLoader.getProperty(ConfigKey.AUTHORIZATION_PAGE.name())).forward(request, response);
 		}
 	}
 

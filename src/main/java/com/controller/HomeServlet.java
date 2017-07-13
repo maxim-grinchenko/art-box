@@ -8,18 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.manager.ConfigKey;
+import com.manager.PropertiesLoader;
+
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private static final String HOME_PAGE = "home.jsp";
        
     public HomeServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(HOME_PAGE);
+		response.sendRedirect(PropertiesLoader.getProperty(ConfigKey.HOME_PAGE.name()));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

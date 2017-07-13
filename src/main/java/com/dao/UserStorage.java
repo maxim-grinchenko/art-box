@@ -15,7 +15,6 @@ import com.model.ArtBoxUser;
 
 public class UserStorage {
 	
-	private static List<ArtBoxUser> users = new ArrayList<ArtBoxUser>();
 	private static UserStorage instance;
 	private static final Logger log = Logger.getLogger(UserStorage.class);
 	
@@ -50,6 +49,7 @@ public class UserStorage {
 		
 		 ConnectionFactoryBuilder connectionFactoryBuilder = new ConnectionFactoryBuilder();
 		 List<ArtBoxUser> users = new ArrayList<ArtBoxUser>();
+		 
 		 try (Connection connection = connectionFactoryBuilder.getConnection()) {
 	            PreparedStatement ps = connection.prepareStatement(SQL_SELECT_USERS);
 	            ResultSet rs = ps.executeQuery();
@@ -76,7 +76,6 @@ public class UserStorage {
 	            ps.setString(1, searchEmail);
 	            ps.execute();
 	            ResultSet rs = ps.executeQuery();
-	          
 	            while (rs.next()) {
 	                String email = rs.getString("EMAIL");
 	                String password = rs.getString("PASSWORD");
@@ -86,10 +85,6 @@ public class UserStorage {
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 			}
-	        
 	        return users;
 	}
-	
-	
-
 }

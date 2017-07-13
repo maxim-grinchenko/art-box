@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.dao.ArtBoxStorage;
+import com.manager.ConfigKey;
+import com.manager.PropertiesLoader;
 import com.model.ArtBox;
 import com.utils.Utils;
 
@@ -18,18 +20,7 @@ import com.utils.Utils;
 public class AddServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final String ARTBOX_NAME = "name";
-	private static final String ARTBOX_AGE = "age";
-	private static final String ARTBOX_COST = "cost";
-	private static final String ADD_PAGE = "add.jsp";
-	private static final String MESSAGE_ATRIBUTE = "message";
-	private static final String TYPE = "type";
-	private static final String ERROR_MASSAGE = "Error with parameters!";
-	private static final String INVALID_MASSAGE = " It can't be negative!";
-	private static final String SUCCESS_MASSAGE_BEGIN = "Success! Product ";
-	private static final String SUCCESS_MASSAGE_END = " was added.";
 	private static final String SUCCESS_ATRIBUTE = "success_message";
-	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
 
 	private static final Logger log = Logger.getLogger(AddServlet.class);
 
@@ -47,20 +38,26 @@ public class AddServlet extends HttpServlet {
 		if (request.getSession().getAttribute("user") == null) {
 			response.sendRedirect("home.jsp");
 		} else {
-			response.sendRedirect(ADD_PAGE);
+			response.sendRedirect(PropertiesLoader.getProperty(ConfigKey.ADD_PAGE.name()));
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		final String _ERROR_MESSAGE = PropertiesLoader.getProperty(ConfigKey.ERROR_MASSAGE.name());
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 
 		String message;
-		String messageType = ERROR_MESSAGE_ATRIBUTE;
-
+		String type = PropertiesLoader.getProperty(ConfigKey.RED.name());
+		
 		try {
+			
+			final String ARTBOX_NAME = "name";
+			final String ARTBOX_AGE = "age";
+			final String ARTBOX_COST = "cost";
 
 			String name = request.getParameter(ARTBOX_NAME);
 			int age = Integer.parseInt(request.getParameter(ARTBOX_AGE));
@@ -69,7 +66,10 @@ public class AddServlet extends HttpServlet {
 			log.debug("get params... name - " + name + "; age - " + age + "; cost - " + cost);
 
 			if (Utils.isValidParameters(age, cost)) {
-				message = ERROR_MASSAGE + INVALID_MASSAGE;
+				
+				final String _INVALID_MESSAGE = PropertiesLoader.getProperty(ConfigKey.INVALID_MASSAGE.name());
+				
+				message = _ERROR_MESSAGE + _INVALID_MESSAGE;
 				log.warn(message);
 			} else {
 
@@ -78,20 +78,23 @@ public class AddServlet extends HttpServlet {
 				ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
 				artboxStorage.addedBase(newArtBox);
 
-				message = SUCCESS_MASSAGE_BEGIN + name + SUCCESS_MASSAGE_END;
-				messageType = SUCCESS_ATRIBUTE;
+				final String _SUCCESS_MASSAGE_BEGIN = PropertiesLoader.getProperty(ConfigKey.SUCCESS_MASSAGE_BEGIN.name());
+				final String _SUCCESS_MASSAGE_END 	= PropertiesLoader.getProperty(ConfigKey.SUCCESS_MASSAGE_END.name());
+				
+				message = _SUCCESS_MASSAGE_BEGIN + name + _SUCCESS_MASSAGE_END;
+				type = SUCCESS_ATRIBUTE;
 
 				log.debug(message);
 			}
 
 		} catch (NumberFormatException e) {
-			message = ERROR_MASSAGE;
+			message = _ERROR_MESSAGE;
 			log.error(message);
 		}
 
-		request.setAttribute(MESSAGE_ATRIBUTE, message);
-		request.setAttribute(TYPE, messageType);
-		request.getRequestDispatcher(ADD_PAGE).forward(request, response);
+		request.setAttribute("message", message);
+		request.setAttribute("type", type);
+		request.getRequestDispatcher(PropertiesLoader.getProperty(ConfigKey.ADD_PAGE.name())).forward(request, response);
 
 	}
 }
