@@ -12,17 +12,14 @@ import javax.servlet.annotation.WebFilter;
 
 import org.apache.log4j.Logger;
 
+import com.manager.ConfigKey;
+import com.manager.PropertiesLoader;
 import com.utils.Utils;
 
 @WebFilter("/authorization")
 public class AuthorizationPasswordFilter implements Filter {
 	
-	private static final String REDIRECT_PAGE = "authorization.jsp";
-	private static final String PASSWORD = "pass";
-	private static final String ERROR_MESSAGE = "Password is incorrect!";
-	private static final String MESSAGE_ATRIBUTE = "message_reg_pass";
 	private static final String ERROR_TYPE_ATRIBUTE = "error_message_reg";
-	private static final String TYPE_ATRIBUTE = "type_register_pass";
 	
 	private static final Logger log = Logger.getLogger(AuthorizationPasswordFilter.class);
 
@@ -34,6 +31,7 @@ public class AuthorizationPasswordFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
+		final String PASSWORD = "pass";
 		String password = request.getParameter(PASSWORD);
 		
 		if (Utils.passwordVerification(password)) {
@@ -41,9 +39,9 @@ public class AuthorizationPasswordFilter implements Filter {
 			chain.doFilter(request, response);
 		} else {
 			log.debug("password is incorrect!");
-			request.setAttribute(MESSAGE_ATRIBUTE, ERROR_MESSAGE);
-			request.setAttribute(TYPE_ATRIBUTE, ERROR_TYPE_ATRIBUTE);
-			request.getRequestDispatcher(REDIRECT_PAGE).forward(request, response);
+			request.setAttribute("message_reg_pass", PropertiesLoader.getProperty(ConfigKey.PASS_INCORECT.name()));
+			request.setAttribute("type_register_pass", ERROR_TYPE_ATRIBUTE);
+			request.getRequestDispatcher(PropertiesLoader.getProperty(ConfigKey.AUTHORIZATION_PAGE.name())).forward(request, response);
 		}
 	}
 

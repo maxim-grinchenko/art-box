@@ -201,20 +201,20 @@ body {
   /*  outline: 1px solid #EA4335;*/
 }
 
-.success_message{
-	color: #008000;
-}
+/* .success_message{ */
+/* 	color: #008000; */
+/* } */
 
-.error_message{
-	color: #FF0000;
-	font-weight: bold;
-}
+/* .error_message{ */
+/* 	color: #FF0000; */
+/* 	font-weight: bold; */
+/* } */
 
-.error_message_reg{
-	color: #FF0000;
-    font-size: 0.8em;
-    margin: 0 0 8px 0;
-}
+/* .error_message_reg{ */
+/* 	color: #FF0000; */
+/*     font-size: 0.8em; */
+/*     margin: 0 0 8px 0; */
+/* } */
 
 /*****************************************************************************
 	dashboard page

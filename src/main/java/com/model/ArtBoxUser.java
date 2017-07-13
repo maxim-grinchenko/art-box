@@ -12,19 +12,17 @@ public class ArtBoxUser {
 		super();
 	}
 	
-	public ArtBoxUser(String name, String email, String password) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.password = password;
-	}
-	
 	public ArtBoxUser(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
 	}
-
+	
+	public ArtBoxUser(String name, String email, String password) {
+		this(email, password);
+		this.name = name;
+	}
+	
 	public long getId() {
 		return id;
 	}

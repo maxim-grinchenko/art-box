@@ -12,18 +12,13 @@ import org.apache.log4j.Logger;
 
 import com.builder.UserBuilder;
 import com.dao.UserStorage;
+import com.manager.ConfigKey;
+import com.manager.PropertiesLoader;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private static final String HOME_PAGE = "home.jsp";	
-	private static final String AUTHORIZATION_PAGE = "authorization.jsp";
-	private static final String NAME = "name";
-	private static final String EMAIL = "email";
-	private static final String PASSWORD = "pass";
-	private static final String SUCCESS_REG = "Congratulation! You registered is successfully!";
-	private static final String GREEN = "green";
 	private static final Logger log = Logger.getLogger(RegistrationServlet.class);
 	
     public RegistrationServlet() {
@@ -31,10 +26,14 @@ public class RegistrationServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(HOME_PAGE);
+		response.sendRedirect(PropertiesLoader.getProperty(ConfigKey.HOME_PAGE.name()));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		final String NAME = "name";
+		final String EMAIL = "email";
+		final String PASSWORD = "pass";
 		
 		String name = request.getParameter(NAME);
 		String password = request.getParameter(PASSWORD);
@@ -49,9 +48,9 @@ public class RegistrationServlet extends HttpServlet {
 									.setUserPassword(password)
 									.getUserBuild());
 		
-		request.setAttribute("message", SUCCESS_REG);
-		request.setAttribute("type", GREEN);
-		request.getRequestDispatcher(AUTHORIZATION_PAGE).forward(request, response);
+		request.setAttribute("message", PropertiesLoader.getProperty(ConfigKey.SUCCESS_REG.name()));
+		request.setAttribute("type", PropertiesLoader.getProperty(ConfigKey.GREEN.name()));
+		request.getRequestDispatcher(PropertiesLoader.getProperty(ConfigKey.AUTHORIZATION_PAGE.name())).forward(request, response);
 	}
 
 }
