@@ -7,16 +7,15 @@
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/artbox?useSSL=false</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/artbox?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false</property>
 		<property name="hibernate.connection.password">root</property>
 		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>	
 		<property name="show_sql">true</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.c3p0.validate">false</property>
 
 		<mapping class="com.model.User"></mapping>
 		<mapping class="com.model.ArtBox"></mapping>
-
 	</session-factory>
 </hibernate-configuration>
