@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 import com.dao.UserStorage;
 import com.manager.ConfigKey;
 import com.manager.PropertiesLoader;
-import com.model.ArtBoxUser;
+import com.model.User;
 
 @WebServlet("/authorization")
 public class AuthorizationServlet extends HttpServlet {
@@ -47,7 +47,7 @@ public class AuthorizationServlet extends HttpServlet {
 
 		boolean successAuthorization = false;
 		
-		for (ArtBoxUser user : UserStorage.findUser()) {
+		for (User user : UserStorage.findUser()) {
 			if (email.equals(user.getEmail()) && password.equals(user.getPassword())) {
 				log.debug("user success authorization!");
 				successAuthorization = true;

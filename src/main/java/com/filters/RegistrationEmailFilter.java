@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import org.apache.log4j.Logger;
 
 import com.controller.RegistrationServlet;
+import com.dao.UserStorage;
 import com.manager.ConfigKey;
 import com.manager.PropertiesLoader;
 import com.utils.Utils;
@@ -39,7 +40,7 @@ public class RegistrationEmailFilter implements Filter {
 			final String EMAIL = "email";
 			String email = request.getParameter(EMAIL);
 
-			if (Utils.emailVerification(email) && Utils.checkForUniquenessOfEmail(email)) {
+			if (Utils.emailVerification(email) && UserStorage.findUserByEmail(email)) {
 				log.debug("Success! email is correct!");
 				chain.doFilter(request, response);
 			} else {

@@ -41,8 +41,7 @@ public class RegistrationServlet extends HttpServlet {
 		
 		log.debug("get param ... email : " + email + "/ password : " + password);
 		
-		UserStorage.addNewUser(new UserBuilder()
-									.setUserId()
+		UserStorage.addUser(new UserBuilder()
 									.setUserName(name)
 									.setUserEmail(email)
 									.setUserPassword(password)

@@ -1,27 +1,17 @@
 package com.builder;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-import com.model.ArtBoxUser;
+import com.model.User;
 
 public class UserBuilder {
 
-	private ArtBoxUser user;
-	private static AtomicInteger counter = new AtomicInteger(0);
+	private User user;
 
 	public UserBuilder() {
-		this.user = new ArtBoxUser();
+		this.user = new User();
 	}
 	
 	public UserBuilder setUserName(String name){
 		this.user.setName(name);
-		return this;
-	}
-
-	public UserBuilder setUserId() {
-		Integer id = null;
-		id = counter.incrementAndGet();
-		this.user.setId(id);
 		return this;
 	}
 
@@ -35,7 +25,7 @@ public class UserBuilder {
 		return this;
 	}
 
-	public ArtBoxUser getUserBuild() {
+	public User getUserBuild() {
 		return this.user;
 	}
 

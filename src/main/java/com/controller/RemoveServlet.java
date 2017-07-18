@@ -19,8 +19,6 @@ public class RemoveServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private static final String PRODUCTS = "products";
-	private static final String ERROR_MESSAGE_ATRIBUTE = "error_message";
-	private static final String SUCCESS_MASSAGE_ATRIBUTE = "success_message";
 	
 	private static final Logger log = Logger.getLogger(RemoveServlet.class);
 
@@ -31,7 +29,7 @@ public class RemoveServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String message;
-		String typeAtribute = ERROR_MESSAGE_ATRIBUTE;
+		String type = PropertiesLoader.getProperty(ConfigKey.RED.name());
 
 		try {
 			
@@ -41,7 +39,7 @@ public class RemoveServlet extends HttpServlet {
 			log.debug("Get parameter to delete: " + id);
 			
 			ArtBoxStorage storage = ArtBoxStorage.getInstance();
-			storage.removedBase(id);
+			storage.deleteArtBox(id);
 			
 			request.setAttribute(PRODUCTS, storage.getList());
 			
@@ -49,7 +47,7 @@ public class RemoveServlet extends HttpServlet {
 			final String _SUCCESS_REMOVED_AFTER 	= PropertiesLoader.getProperty(ConfigKey.SUCCESS_REMOVED_AFTER.name());
 			
 			message = _SUCCESS_REMOVED_BEFORE + id + _SUCCESS_REMOVED_AFTER;
-			typeAtribute = SUCCESS_MASSAGE_ATRIBUTE;
+			type = PropertiesLoader.getProperty(ConfigKey.GREEN.name());
 			log.debug(message);
 			
 		} catch (NumberFormatException e) {
@@ -61,7 +59,7 @@ public class RemoveServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("message", message);
-		request.setAttribute("type", typeAtribute);
+		request.setAttribute("type", type);
 		request.getRequestDispatcher(PropertiesLoader.getProperty(ConfigKey.DASHBOARD_PAGE.name())).forward(request, response);
 	}
 

@@ -43,7 +43,7 @@ public class DisplayServlet extends HttpServlet {
 
 			ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
 			List<ArtBox> collectionsArtBox = artboxStorage.getList();
-			String typeAtribute = ERROR_MESSAGE_ATRIBUTE;
+			String type = ERROR_MESSAGE_ATRIBUTE;
 
 			if (collectionsArtBox.isEmpty() || collectionsArtBox == null) {
 				
@@ -56,7 +56,7 @@ public class DisplayServlet extends HttpServlet {
 				log.debug("Display collections ArtBox...");
 			}
 
-			request.setAttribute("type", typeAtribute);
+			request.setAttribute("type", type);
 			request.getRequestDispatcher(PropertiesLoader.getProperty(ConfigKey.DASHBOARD_PAGE.name())).forward(request, response);
 		}
 	}

@@ -20,7 +20,6 @@ import com.utils.Utils;
 public class AddServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final String SUCCESS_ATRIBUTE = "success_message";
 
 	private static final Logger log = Logger.getLogger(AddServlet.class);
 
@@ -82,9 +81,7 @@ public class AddServlet extends HttpServlet {
 				final String _SUCCESS_MASSAGE_END 	= PropertiesLoader.getProperty(ConfigKey.SUCCESS_MASSAGE_END.name());
 				
 				message = _SUCCESS_MASSAGE_BEGIN + name + _SUCCESS_MASSAGE_END;
-				type = SUCCESS_ATRIBUTE;
-
-				log.debug(message);
+				type = PropertiesLoader.getProperty(ConfigKey.GREEN.name());
 			}
 
 		} catch (NumberFormatException e) {
