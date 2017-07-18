@@ -1,24 +1,45 @@
 package com.model;
 
-//@Entity
-//@Table(name = "users")
-public class ArtBoxUser {
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="users")
+public class User implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column
+	@GenericGenerator(name = "auto_inc", strategy = "increment")
 	private long id;
+	
+	@Column 
 	private String name;
+	
+	@Column 
 	private String email;
+	
+	@Column
 	private String password;
 	
-	public ArtBoxUser() {
+	public User() {
 		super();
 	}
 	
-	public ArtBoxUser(String email, String password) {
+	public User(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
 	}
 	
-	public ArtBoxUser(String name, String email, String password) {
+	public User(String name, String email, String password) {
 		this(email, password);
 		this.name = name;
 	}

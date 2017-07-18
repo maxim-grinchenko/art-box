@@ -1,11 +1,37 @@
 package com.model;
 
-public class ArtBox {
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "products")
+public class ArtBox implements Serializable{
 	
+	private static final long serialVersionUID = 1394408669538656589L;
+
+	@Id
+	@Column
+	@GenericGenerator (name = "auto_inc", strategy = "increment")
 	private int id;
+	
+	@Column
 	private String name;
+	
+	@Column
 	private int age;
+	
+	@Column
 	private double cost;
+	
+	public ArtBox(){
+		
+	}
 	
 	public ArtBox (String name, int age, double cost){
 		this.name = name;
